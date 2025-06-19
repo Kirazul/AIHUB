@@ -1990,6 +1990,41 @@
             });
             return prompt;
         }
+        // Function to check if conversation might be approaching token limits
+        function checkConversationLength(conversation) {
+            // A rough estimate of tokens - typically 1 token is about 4 chars in English
+            if (!conversation || !conversation.messages) return false;
+            
+            let totalChars = 0;
+            
+            // Count characters in system prompt
+            if (state.systemPrompt) {
+                totalChars += state.systemPrompt.length;
+            }
+            
+            // Count characters in all messages
+            conversation.messages.forEach(msg => {
+                totalChars += msg.content.length;
+            });
+            
+            // Estimate tokens (4 chars per token is a rough estimate)
+            const estimatedTokens = Math.floor(totalChars / 4);
+            
+            // If approaching danger zone (4000+ tokens might be risky)
+            if (estimatedTokens > 4000) {
+                // Show warning in the chat
+                const warningTimestamp = new Date();
+                conversation.messages.push({
+                    role: 'system',
+                    content: "Warning: This conversation is getting lengthy and might soon exceed the AI's token limit. Consider starting a new chat if you encounter errors.",
+                    timestamp: warningTimestamp.toISOString()
+                });
+                renderCurrentConversation();
+                scrollToBottom();
+                return true;
+            }
+            return false;
+        }
         // Send a message to the AI
         async function sendMessage() {
             const userInput = elements.messageInput.value.trim();
@@ -2002,6 +2037,7 @@
                 // Use the first message as the conversation title
                 conversation.title = userInput.length > 30 ? userInput.substring(0, 30) + '...' : userInput;
             }
+            
             // Add timestamp to the message
             const timestamp = new Date();
             // Add user message
@@ -2010,16 +2046,29 @@
                 content: userInput,
                 timestamp: timestamp.toISOString()
             });
+            
             // Clear input and resize
             elements.messageInput.value = '';
             elements.messageInput.style.height = 'auto';
+            
             // Render the updated conversation
             renderCurrentConversation();
             saveState();
+            
+            // Check if conversation is getting too long
+            const isLengthWarning = checkConversationLength(conversation);
+            
             // Scroll to bottom
             scrollToBottom();
+            
+            // If we just added a warning, don't try to get AI response
+            if (isLengthWarning) {
+                return;
+            }
+            
             // Add typing indicator to show AI is responding
             addTypingIndicator();
+            
             // Create structured prompt with conversation history
             const structuredPrompt = createStructuredPrompt(userInput, conversation);
             // Encode the prompt for URL
@@ -2058,11 +2107,20 @@
                 console.error('Error fetching AI response:', error);
                 // Remove typing indicator if present
                 removeTypingIndicator();
+                
+                // Check for token limit error or timeout error
+                let errorMessage = '';
+                if (error.message.includes('timeout') || error.message.includes('fetch')) {
+                    errorMessage = "The conversation is too long and exceeded the AI's token limit. Please start a new chat or try a different model.";
+                } else {
+                    errorMessage = `Error: ${error.message}`;
+                }
+                
                 // Add error message
                 const errorTimestamp = new Date();
                 conversation.messages.push({
                     role: 'system',
-                    content: `Error: Failed to get response from AI. 对话过长导致令牌限制，请新建会话或切换模型重试 ${error.message}`,
+                    content: errorMessage,
                     model: state.currentModel.description,
                     timestamp: errorTimestamp.toISOString()
                 });
@@ -2151,6 +2209,7 @@
                 messageBubble.classList.add('message-bubble');
                 const messageText = document.createElement('div');
                 messageText.classList.add('message-text');
+                
                 // Format the message content with markdown-like formatting
                 let formattedContent = message.content;
                 // Extract code blocks and replace with placeholders
@@ -2173,7 +2232,23 @@
                         `<pre>${escapeHtml(block.content)}</pre><button class="code-preview-btn">Preview Code</button><div class="code-preview">${previewContent}</div>`
                     );
                 }
-                messageText.innerHTML = formattedContent;
+                
+                // Add special handling for system error messages about token limits
+                if (message.role === 'system' && (
+                    message.content.includes('token limit') || 
+                    message.content.includes('too long') ||
+                    message.content.includes('exceeded')
+                )) {
+                    messageText.innerHTML = `
+                        <div style="color: #ff3333; margin-bottom: 10px;">${formattedContent}</div>
+                        <button id="newChatFromError" class="btn" style="background: var(--primary-color); color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-plus"></i> Start New Chat
+                        </button>
+                    `;
+                } else {
+                    messageText.innerHTML = formattedContent;
+                }
+                
                 messageBubble.appendChild(messageText);
                 // Add message actions (copy button and model info)
                 if (message.role === 'assistant') {
@@ -2207,6 +2282,13 @@
             });
             // Setup code preview buttons
             setupCodePreviewButtons();
+            
+            // Add event listener to the "Start New Chat" button if it exists
+            const newChatFromErrorBtn = document.getElementById('newChatFromError');
+            if (newChatFromErrorBtn) {
+                newChatFromErrorBtn.addEventListener('click', createNewConversation);
+            }
+            
             // Re-add typing indicator if it was there before
             if (hasTypingIndicator) {
                 addTypingIndicator();
