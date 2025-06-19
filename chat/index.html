@@ -1193,7 +1193,7 @@
         }
     </style>
 </head>
-<body class="sidebar-hidden">
+<body class="sidebar-hidden" data-theme="dark">
     <!-- Sidebar for conversations -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -1612,7 +1612,7 @@
             chatCounter: 0,
             pinnedChats: [],
             isAiTyping: false,
-            currentTheme: 'light',
+            currentTheme: 'dark', // Default to dark theme
             chatFontSize: 14, // Default font size
             sidebarHidden: true // Default sidebar hidden (for first time users)
         };
@@ -1702,7 +1702,7 @@
                     chatCounter: parsedState.chatCounter || 0,
                     pinnedChats: parsedState.pinnedChats || [],
                     isAiTyping: false,
-                    currentTheme: parsedState.currentTheme || 'light',
+                    currentTheme: parsedState.currentTheme || 'dark',
                     chatFontSize: parsedState.chatFontSize || 14,
                     sidebarHidden: parsedState.sidebarHidden !== undefined ? parsedState.sidebarHidden : true
                 };
