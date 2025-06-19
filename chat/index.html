@@ -2025,13 +2025,57 @@
             }
             return false;
         }
-        // Send a message to the AI
+        // Add function to detect if the user is requesting an image generation
+        function isImageGenerationRequest(text) {
+            // Check for common phrases that indicate image generation requests
+            const imageRequestPatterns = [
+                /generate (an |a |some )?image/i,
+                /create (an |a |some )?image/i,
+                /draw (an |a |some )?/i,
+                /picture of/i,
+                /generate (an |a |some )?picture/i,
+                /create (an |a |some )?picture/i,
+                /make (an |a |some )?image/i,
+                /visualize/i,
+                /show me (an |a |some )?image/i,
+                /can you (generate|create|draw|make|show)/i
+            ];
+            
+            return imageRequestPatterns.some(pattern => pattern.test(text));
+        }
+
+        // Function to generate an image using the Pollinations.ai API
+        async function generateImage(prompt) {
+            // Default parameters similar to those in the image generation page
+            const params = {
+                model: "flux", // Default model
+                width: 720,
+                height: 720,
+                seed: Math.floor(Math.random() * 2147483647),
+                nologo: true,
+                negative_prompt: "worst quality, blurry"
+            };
+            
+            // Construct the URL for the image generation API
+            let url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+            url += `?width=${params.width}&height=${params.height}&seed=${params.seed}&model=${params.model}`;
+            url += `&negative_prompt=${encodeURIComponent(params.negative_prompt)}`;
+            if (params.nologo) {
+                url += '&nologo=true';
+            }
+            
+            return url;
+        }
+
+        // Enhanced sendMessage function to handle image generation requests
         async function sendMessage() {
             const userInput = elements.messageInput.value.trim();
             if (!userInput || state.isAiTyping) return;
+            
             // Add user message to the conversation
             const conversation = getCurrentConversation();
             if (!conversation) return;
+            
             // Check if this is the first message and update the conversation title
             if (conversation.messages.length === 0) {
                 // Use the first message as the conversation title
@@ -2040,6 +2084,7 @@
             
             // Add timestamp to the message
             const timestamp = new Date();
+            
             // Add user message
             conversation.messages.push({
                 role: 'user',
@@ -2069,28 +2114,75 @@
             // Add typing indicator to show AI is responding
             addTypingIndicator();
             
-            // Create structured prompt with conversation history
-            const structuredPrompt = createStructuredPrompt(userInput, conversation);
-            // Encode the prompt for URL
-            const encodedPrompt = encodeURIComponent(structuredPrompt);
-            const apiUrl = `https://text.pollinations.ai/${encodedPrompt}?model=${state.currentModel.name}`;
+            // Check if the message is requesting image generation
+            const isImageRequest = isImageGenerationRequest(userInput);
+            
             try {
+                // If this is an image request, handle it differently
+                if (isImageRequest) {
+                    // Create a response that includes both text and an image
+                    const imagePrompt = userInput.replace(/generate an image of|generate image of|draw|create an image of|show me an image of|picture of|draw me|create a picture of|visualize|can you generate|can you draw|can you create/gi, '').trim();
+                    
+                    // Generate the image URL
+                    const imageUrl = await generateImage(imagePrompt);
+                    
+                    // Create response with image
+                    const aiResponse = `Sure, I've generated an image based on your prompt: "${imagePrompt}"
+
+![Generated Image](${imageUrl})
+
+Is this what you were looking for? If you'd like changes to the image, you can ask for specific adjustments.`;
+                    
+                    // Remove typing indicator
+                    removeTypingIndicator();
+                    
+                    // Add the response to the conversation
+                    const responseTimestamp = new Date();
+                    conversation.messages.push({
+                        id: Date.now().toString(),
+                        role: 'assistant',
+                        content: aiResponse,
+                        model: state.currentModel.description,
+                        timestamp: responseTimestamp.toISOString()
+                    });
+                    
+                    // Update the UI
+                    renderCurrentConversation();
+                    scrollToBottom();
+                    saveState();
+                    
+                    return;
+                }
+                
+                // For non-image requests, continue with the normal text API flow
+                // Create structured prompt with conversation history
+                const structuredPrompt = createStructuredPrompt(userInput, conversation);
+                
+                // Encode the prompt for URL
+                const encodedPrompt = encodeURIComponent(structuredPrompt);
+                const apiUrl = `https://text.pollinations.ai/${encodedPrompt}?model=${state.currentModel.name}`;
+                
                 // Create a placeholder message for the AI's response
                 const aiMessageId = Date.now().toString();
+                
                 // Fetch the response
                 const response = await fetch(apiUrl);
+                
                 // Get the full response
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
                 let aiResponse = '';
+                
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
                     const chunk = decoder.decode(value, { stream: true });
                     aiResponse += chunk;
                 }
+                
                 // Remove typing indicator and add the full response
                 removeTypingIndicator();
+                
                 // Add the full response
                 const responseTimestamp = new Date();
                 conversation.messages.push({
@@ -2100,11 +2192,13 @@
                     model: state.currentModel.description,
                     timestamp: responseTimestamp.toISOString()
                 });
+                
                 renderCurrentConversation();
                 scrollToBottom();
                 saveState();
+                
             } catch (error) {
-                console.error('Error fetching AI response:', error);
+                console.error('Error fetching response:', error);
                 // Remove typing indicator if present
                 removeTypingIndicator();
                 
@@ -2173,17 +2267,22 @@
         function renderCurrentConversation() {
             const conversation = getCurrentConversation();
             if (!conversation) return;
+            
             // Preserve typing indicator if it exists
             const typingIndicator = document.getElementById('typingIndicator');
             const hasTypingIndicator = typingIndicator !== null;
+            
             elements.chatArea.innerHTML = '';
+            
             // Keep track of last displayed timestamp
             let lastTimestamp = null;
+            
             conversation.messages.forEach((message, index) => {
                 // Add timestamp above message if needed
                 if (message.timestamp) {
                     const messageDate = new Date(message.timestamp);
                     const timeStr = formatTime(messageDate);
+                    
                     // Only add timestamp if it's different from the last one displayed
                     if (!lastTimestamp || timeStr !== lastTimestamp) {
                         const timeDiv = document.createElement('div');
@@ -2197,13 +2296,16 @@
                         lastTimestamp = timeStr;
                     }
                 }
+                
                 const messageDiv = document.createElement('div');
                 messageDiv.classList.add('message', `message-${message.role === 'user' ? 'user' : 'ai'}`);
+                
                 // Create avatar
                 const avatarDiv = document.createElement('div');
                 avatarDiv.classList.add('message-avatar');
                 avatarDiv.innerHTML = message.role === 'user' ? userAvatar : aiAvatar;
                 messageDiv.appendChild(avatarDiv);
+                
                 // Create message bubble
                 const messageBubble = document.createElement('div');
                 messageBubble.classList.add('message-bubble');
@@ -2212,6 +2314,12 @@
                 
                 // Format the message content with markdown-like formatting
                 let formattedContent = message.content;
+                
+                // Handle Markdown-style images
+                formattedContent = formattedContent.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, altText, imageUrl) => {
+                    return `<div class="chat-image-container" style="margin: 10px 0;"><img src="${imageUrl}" alt="${altText}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" /><div style="margin-top: 5px; font-size: 0.85rem; text-align: center; color: var(--light-text);">${altText}</div></div>`;
+                });
+                
                 // Extract code blocks and replace with placeholders
                 const codeBlocks = [];
                 formattedContent = formattedContent.replace(/```([^`]*?)```/gs, (match, codeContent) => {
@@ -2219,10 +2327,12 @@
                     codeBlocks.push({ id, content: codeContent.trim() });
                     return `[${id}]`;
                 });
+                
                 // Handle inline code
                 formattedContent = formattedContent.replace(/`([^`]+)`/g, (match, code) => {
                     return `<code>${escapeHtml(code)}</code>`;
                 });
+                
                 // Restore code blocks with proper formatting
                 for (const block of codeBlocks) {
                    const codeType = detectCodeType(block.content);
@@ -2250,10 +2360,12 @@
                 }
                 
                 messageBubble.appendChild(messageText);
+                
                 // Add message actions (copy button and model info)
                 if (message.role === 'assistant') {
                     const messageActions = document.createElement('div');
                     messageActions.classList.add('message-actions');
+                    
                     const copyBtn = document.createElement('div');
                     copyBtn.classList.add('message-copy');
                     copyBtn.innerHTML = '<i class="fas fa-copy"></i> ';
@@ -2268,6 +2380,7 @@
                             .catch(err => console.error('Could not copy text: ', err));
                     });
                     messageActions.appendChild(copyBtn);
+                    
                     // Add model info for AI messages
                     if (message.model) {
                         const modelInfo = document.createElement('div');
@@ -2275,11 +2388,14 @@
                         modelInfo.textContent = message.model;
                         messageActions.appendChild(modelInfo);
                     }
+                    
                     messageBubble.appendChild(messageActions);
                 }
+                
                 messageDiv.appendChild(messageBubble);
                 elements.chatArea.appendChild(messageDiv);
             });
+            
             // Setup code preview buttons
             setupCodePreviewButtons();
             
@@ -2289,10 +2405,28 @@
                 newChatFromErrorBtn.addEventListener('click', createNewConversation);
             }
             
+            // Add event listeners for image buttons
+            const imageButtons = document.querySelectorAll('.image-action-button');
+            imageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    const imageUrl = this.getAttribute('data-url');
+                    
+                    if (action === 'download') {
+                        // Open image in a new tab for download
+                        window.open(imageUrl, '_blank');
+                    } else if (action === 'regenerate') {
+                        const prompt = this.getAttribute('data-prompt');
+                        // TODO: Implement regenerate functionality
+                    }
+                });
+            });
+            
             // Re-add typing indicator if it was there before
             if (hasTypingIndicator) {
                 addTypingIndicator();
             }
+            
             // Update conversation title in sidebar
             renderConversationList();
         }
