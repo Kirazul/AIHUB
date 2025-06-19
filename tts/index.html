@@ -1003,7 +1003,7 @@ h1::after {
 <label for="voice-aster">
 <span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-aster);"></i></span>
 <span class="voice-style-name">Aster</span>
-<span class="voice-style-desc">清晰直接</span>
+<span class="voice-style-desc">Clear & Direct</span>
 </label>
 </div>
 <div class="voice-style-option">
@@ -1011,7 +1011,7 @@ h1::after {
 <label for="voice-brook">
 <span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-brook);"></i></span>
 <span class="voice-style-name">Brook</span>
-<span class="voice-style-desc">流畅舒适</span>
+<span class="voice-style-desc">Smooth & Comfortable</span>
 </label>
 </div>
 <div class="voice-style-option">
@@ -1019,7 +1019,7 @@ h1::after {
 <label for="voice-clover">
 <span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-clover);"></i></span>
 <span class="voice-style-name">Clover</span>
-<span class="voice-style-desc">活泼年轻</span>
+<span class="voice-style-desc">Lively & Young</span>
 </label>
 </div>
 <div class="voice-style-option">
@@ -1027,7 +1027,7 @@ h1::after {
 <label for="voice-dan">
 <span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-dan);"></i></span>
 <span class="voice-style-name">Dan</span>
-<span class="voice-style-desc">男声稳重</span>
+<span class="voice-style-desc">Steady Male Voice</span>
 </label>
 </div>
 <div class="voice-style-option">
@@ -1035,40 +1035,40 @@ h1::after {
 <label for="voice-elan">
 <span class="voice-style-icon"><i class="fas fa-microphone" style="color: var(--voice-elan);"></i></span>
 <span class="voice-style-name">Elan</span>
-<span class="voice-style-desc">优雅流利</span>
+<span class="voice-style-desc">Elegant & Fluent</span>
 </label>
 </div>
 </div>
 <div class="divider"></div>
 <!-- 文本输入 -->
-<div class="input-section-title"><i class="fas fa-pen-fancy"></i>输入文本</div>
-<textarea id="textInput" placeholder="使用ai回复生成对话。如需让AI照着念，可以在文本之前加上：请照着文本念"></textarea>
+<div class="input-section-title"><i class="fas fa-pen-fancy"></i>Enter Text</div>
+<textarea id="textInput" placeholder="Enter text for AI voice to read. If you want the AI to read exactly as written, start with: Please read the text exactly as written."></textarea>
 <div class="text-stats">
 <div class="text-stat">
 <i class="fas fa-text-height"></i>
-<span id="charCount">字符数: 0</span>
+<span id="charCount">Characters: 0</span>
 </div>
 <div class="text-stat">
 <i class="fas fa-clock"></i>
-<span id="durationEstimate">估计时长: 0 秒</span>
+<span id="durationEstimate">Estimated duration: 0 seconds</span>
 </div>
 </div>
 <div style="display: flex; align-items: center;">
 <button id="generateBtn" class="btn">
 <i class="fas fa-waveform-voice"></i>
-<span id="generateBtnText">生成语音</span>
+<span id="generateBtnText">Generate Audio</span>
 <span id="generateBtnSpinner" class="spinner" style="display: none; margin-left: 8px;"></span>
 </button>
-<div class="shortcut-hint">快捷键: <kbd>Ctrl</kbd> + <kbd>Enter</kbd></div>
+<div class="shortcut-hint">Shortcut: <kbd>Ctrl</kbd> + <kbd>Enter</kbd></div>
 </div>
 </div>
 <div class="usage-tips">
-<div class="tips-title"><i class="fas fa-lightbulb"></i>使用小技巧</div>
+<div class="tips-title"><i class="fas fa-lightbulb"></i>Tips</div>
 <ul class="tips-list">
-<li>输入标点符号可增加语音的自然停顿和语调变化</li>
-<li>不同语音风格适合不同场景，可以尝试多种风格找到最适合的</li>
-<li>大段文本可划分为多个段落，生成后再合并，效果更佳</li>
-<li>特殊专业术语可能需要加注音或替换为更通用的表达</li>
+<li>Use punctuation to add natural pauses and tone variations to the speech</li>
+<li>Different voice styles suit different scenarios - experiment to find the best fit</li>
+<li>For long texts, dividing into paragraphs and generating separately may yield better results</li>
+<li>Specialized terms may need phonetic notation or replacement with more common expressions</li>
 </ul>
 </div>
 </section>
@@ -1079,7 +1079,7 @@ h1::after {
 <i class="fas fa-headphones-alt fa-5x"></i>
 </div>
 <div class="preview-header">
-<h3 class="preview-title"><i class="fas fa-play-circle"></i>音频预览</h3>
+<h3 class="preview-title"><i class="fas fa-play-circle"></i>Audio Preview</h3>
 </div>
 <div id="currentVoiceContainer" style="display: none;" class="current-voice-info">
 <div class="current-voice-icon" id="currentVoiceIcon">
@@ -1093,46 +1093,46 @@ h1::after {
 <div id="audioContainer" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
 <div class="preview-placeholder" id="noAudioMessage">
 <i class="fas fa-music"></i>
-<span>尚未生成语音</span>
+<span>No audio generated yet</span>
 </div>
 </div>
 </div>
 <div id="downloadContainer" style="display: none;">
 <button id="downloadBtn" class="btn btn-success">
-<i class="fas fa-download"></i>下载音频文件
+<i class="fas fa-download"></i>Download Audio File
 </button>
 </div>
 <div class="loading" id="loadingIndicator">
-<span class="spinner"></span> 正在生成语音...
+<span class="spinner"></span> Generating audio...
 </div>
 <div id="statusMessage" class="status"></div>
 </div>
 <div class="card history-section">
 <div class="history-header">
-<h2 class="section-title"><i class="fas fa-history"></i>历史记录 <span class="badge">最近10条</span></h2>
+<h2 class="section-title"><i class="fas fa-history"></i>History <span class="badge">Last 10</span></h2>
 <button id="clearHistoryBtn" class="btn btn-sm btn-danger">
-<i class="fas fa-trash"></i>清空记录
+<i class="fas fa-trash"></i>Clear History
 </button>
 </div>
 <div class="history-warning">
 <i class="fas fa-exclamation-triangle"></i>
-生成记录链接刷新后重置，请注意下载
+History links reset after refresh. Please download any audio you wish to keep.
 </div>
 <div class="history-container" id="historyContainer">
 <div id="historyList">
-<p class="no-history">暂无历史记录</p>
+<p class="no-history">No history records</p>
 </div>
 </div>
 </div>
 <div class="features-card">
-<h3 class="features-title">语音特性</h3>
+<h3 class="features-title">Voice Features</h3>
 <ul class="features-list">
 <li class="feature-item">
 <div class="feature-icon">
 <i class="fas fa-volume-high"></i>
 </div>
 <div class="feature-text">
-自然流畅的语音合成，接近真人发音
+Natural, fluid voice synthesis approaching human speech
 </div>
 </li>
 <li class="feature-item">
@@ -1140,7 +1140,7 @@ h1::after {
 <i class="fas fa-users"></i>
 </div>
 <div class="feature-text">
-多种声音风格可选，满足不同场景需求
+Multiple voice styles available for different scenarios
 </div>
 </li>
 <li class="feature-item">
@@ -1148,7 +1148,7 @@ h1::after {
 <i class="fas fa-align-left"></i>
 </div>
 <div class="feature-text">
-支持长文本转换，适合各种内容创作
+Supports long text conversion, ideal for content creation
 </div>
 </li>
 <li class="feature-item">
@@ -1156,7 +1156,7 @@ h1::after {
 <i class="fas fa-download"></i>
 </div>
 <div class="feature-text">
-一键下载MP3格式音频，可用于多平台分享
+One-click MP3 download for sharing across platforms
 </div>
 </li>
 <li class="feature-item">
@@ -1164,7 +1164,7 @@ h1::after {
 <i class="fas fa-history"></i>
 </div>
 <div class="feature-text">
-本地保存历史记录，方便重复使用和比较
+Local history storage for easy reuse and comparison
 </div>
 </li>
 </ul>
@@ -1199,25 +1199,25 @@ const currentVoiceDesc = document.getElementById('currentVoiceDesc');
 const MAX_HISTORY_ITEMS = 10; // Limit history to 10 items
 const CHARS_PER_MINUTE = 150; // Estimated speaking speed
 const voiceDescriptions = {
-    'alloy': '平衡中性',
-    'echo': '深沉有力',
-    'fable': '温暖讲述',
-    'onyx': '威严庄重',
-    'nova': '友好专业',
-    'shimmer': '轻快明亮',
-    'coral': '温柔平静',
-    'verse': '生动诗意',
-    'ballad': '抒情柔和',
-    'ash': '思考沉稳',
-    'sage': '智慧老练',
-    'amuch': '饱满自然',
-    'aster': '清晰直接',
-    'brook': '流畅舒适',
-    'clover': '活泼年轻',
-    'dan': '男声稳重',
-    'elan': '优雅流利',
-    'marilyn': '柔美圆润',
-    'meadow': '平和自然'
+    'alloy': 'Balanced & Neutral',
+    'echo': 'Deep & Powerful',
+    'fable': 'Warm Narration',
+    'onyx': 'Authoritative',
+    'nova': 'Friendly & Professional',
+    'shimmer': 'Light & Bright',
+    'coral': 'Gentle & Calm',
+    'verse': 'Vivid & Poetic',
+    'ballad': 'Lyrical & Soft',
+    'ash': 'Thoughtful & Steady',
+    'sage': 'Wise & Experienced',
+    'amuch': 'Full & Natural',
+    'aster': 'Clear & Direct',
+    'brook': 'Smooth & Comfortable',
+    'clover': 'Lively & Young',
+    'dan': 'Steady Male Voice',
+    'elan': 'Elegant & Fluent',
+    'marilyn': 'Soft & Rounded',
+    'meadow': 'Peaceful & Natural'
 };
 const voiceColors = {
     'alloy': '#4F46E5',
@@ -1259,25 +1259,25 @@ function updateTextStats() {
     const text = textInput.value.trim();
     const count = text.length;
     // Update character count
-    charCount.textContent = `字符数: ${count}`;
+    charCount.textContent = `Characters: ${count}`;
     // Calculate and update duration estimate
     const durationMinutes = count / CHARS_PER_MINUTE;
     let durationText;
     if (durationMinutes < 1/60) {
-        durationText = '不到1秒';
+        durationText = 'Less than 1 second';
     } else if (durationMinutes < 1) {
         const seconds = Math.round(durationMinutes * 60);
-        durationText = `${seconds} 秒`;
+        durationText = `${seconds} seconds`;
     } else {
         const minutes = Math.floor(durationMinutes);
         const seconds = Math.round((durationMinutes - minutes) * 60);
         if (seconds === 0) {
-            durationText = `${minutes} 分钟`;
+            durationText = `${minutes} minute${minutes > 1 ? 's' : ''}`;
         } else {
-            durationText = `${minutes} 分钟 ${seconds} 秒`;
+            durationText = `${minutes} minute${minutes > 1 ? 's' : ''} ${seconds} seconds`;
         }
     }
-    durationEstimate.textContent = `估计时长: ${durationText}`;
+    durationEstimate.textContent = `Estimated duration: ${durationText}`;
 }
 // Function to update the current voice display
 function updateCurrentVoiceDisplay(voice) {
@@ -1295,12 +1295,12 @@ async function generateAudio() {
     const selectedVoiceElement = document.querySelector('.voice-style-option input[type="radio"]:checked');
     const voice = selectedVoiceElement ? selectedVoiceElement.value : voiceSelect.value;
     if (!text) {
-        showStatus('请输入文本内容', 'error');
+        showStatus('Please enter text content', 'error');
         return;
     }
     // Show loading indicators
     loadingIndicator.style.display = 'flex';
-    generateBtnText.textContent = "正在生成...";
+    generateBtnText.textContent = "Generating...";
     generateBtnSpinner.style.display = 'inline-block';
     generateBtn.disabled = true;
     // Hide any previous status message
@@ -1334,7 +1334,7 @@ async function generateAudio() {
         if (noAudioMessage) {
             noAudioMessage.style.display = 'none';
         }
-        audioContainer.innerHTML = ''; // 清除预览容器
+        audioContainer.innerHTML = ''; // Clear preview container
         audioContainer.appendChild(customPlayerDiv);
         // Show download button
         downloadContainer.style.display = 'block';
@@ -1359,16 +1359,16 @@ async function generateAudio() {
         }
         saveHistory();
         updateHistoryUI(historyItem.id); // Pass the new item ID to highlight it
-        showStatus('语音生成成功！', 'success');
+        showStatus('Audio generated successfully!', 'success');
         // Play the audio automatically
         audioElement.play();
     } catch (error) {
         console.error('Error generating audio:', error);
-        showStatus(`生成语音时出错: ${error.message}`, 'error');
+        showStatus(`Error generating audio: ${error.message}`, 'error');
     } finally {
         // Hide loading indicators
         loadingIndicator.style.display = 'none';
-        generateBtnText.textContent = "生成语音";
+        generateBtnText.textContent = "Generate Audio";
         generateBtnSpinner.style.display = 'none';
         generateBtn.disabled = false;
     }
@@ -1376,7 +1376,7 @@ async function generateAudio() {
 // Function to download the generated audio
 function downloadAudio(blob, filename) {
     if (!blob) {
-        showStatus('没有可下载的音频', 'error');
+        showStatus('No audio available to download', 'error');
         return;
     }
     const downloadUrl = URL.createObjectURL(blob);
@@ -1400,7 +1400,7 @@ function downloadHistoryItem(id) {
 // Function to update the history UI
 function updateHistoryUI(newItemId) {
     if (history.length === 0) {
-        historyList.innerHTML = '<p class="no-history">暂无历史记录</p>';
+        historyList.innerHTML = '<p class="no-history">No history records</p>';
         return;
     }
     historyList.innerHTML = '';
@@ -1421,7 +1421,7 @@ function updateHistoryUI(newItemId) {
                 <div class="history-text">${item.previewText}</div>
             </div>
             <button class="btn btn-text history-download" data-id="${item.id}">
-                <i class="fas fa-download"></i> 下载
+                <i class="fas fa-download"></i> Download
             </button>
         `;
         historyList.appendChild(historyItem);
@@ -1436,11 +1436,11 @@ function updateHistoryUI(newItemId) {
 }
 // Function to clear all history
 function clearHistory() {
-    if (confirm('确定要清空所有历史记录吗？这个操作不可撤销。')) {
+    if (confirm('Are you sure you want to clear all history records? This action cannot be undone.')) {
         history = [];
         localStorage.removeItem('audioGeneratorHistory');
         updateHistoryUI();
-        showStatus('历史记录已清空', 'success');
+        showStatus('History cleared', 'success');
     }
 }
 // Function to save history to localStorage
