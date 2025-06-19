@@ -37,7 +37,7 @@ Create realistic speech from text in multiple languages and voice styles. Perfec
 
 ## 🌐 Live Demo
 
-Visit the live demo: [AI HUB](https://kirazul.github.io/FreeApi/)
+Visit the live demo: [AI HUB](https://kirazul.github.io/aihub/)
 
 <br>
 
