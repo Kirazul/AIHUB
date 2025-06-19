@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="shortcut icon" href="/favicon.ico">
-    <title>Free AI 绘画生成器</title>
+    <title>Free AI Image Generator</title>
     <style>
         :root {
             --primary-color: #00a8ff;
@@ -500,8 +500,8 @@
         <div class="glow-effect" style="bottom: 30%; right: 10%;"></div>
         
         <header>
-            <h1>Free AI绘画生成器</h1>
-            <p class="subtitle">基于Pollinations AI的高级图像生成系统</p>
+            <h1>Free AI Painting Generator</h1>
+            <p class="subtitle">Based on Pollinations AI's Advanced Image Generation System</p>
 <br><br>
 
 
@@ -561,11 +561,11 @@
 
 </style>
 
-<a href="https://freeai.azad.asia" class="sci-fi-btn" style="text-decoration: none;">
-    <!-- 添加流光边框 -->
+<a href="https://kirazul.github.io/FreeApi" class="sci-fi-btn" style="text-decoration: none;">
+    <!-- Glowing borders -->
     <span class="glowing-border"></span>
     <span class="glowing-border"></span>
-    返回首页
+    Back to Home
 </a>
 
         </header>
@@ -573,86 +573,86 @@
         <div class="main-content">
             <div class="control-panel">
                 <div class="form-group">
-                    <label for="prompt">提示词 (Prompt)</label>
-                    <textarea id="prompt" placeholder="描述你想要生成的图像内容..."></textarea>
-                                        <div class="parameter-tips">提示：使用详细、具体的描述可以获得更好的结果。尝试描述风格、场景、颜色等细节。</div>
+                    <label for="prompt">Prompt</label>
+                    <textarea id="prompt" placeholder="Describe the image you want to generate..."></textarea>
+                                        <div class="parameter-tips">Tip: Use detailed and specific descriptions for better results. Try describing style, scene, colors, and other details.</div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="negative-prompt">负面提示词 (Negative Prompt)</label>
-                    <input type="text" id="negative-prompt" placeholder="描述你不希望出现在图像中的内容..." value="worst quality, blurry">
-                    <div class="parameter-tips">提示：用于排除不想要的元素，如"模糊的、低质量的"等。</div>
+                    <label for="negative-prompt">Negative Prompt</label>
+                    <input type="text" id="negative-prompt" placeholder="Describe what you don't want to appear in the image..." value="worst quality, blurry">
+                    <div class="parameter-tips">Tip: Used to exclude unwanted elements, such as "blurry, low quality" etc.</div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="model">模型选择</label>
+                    <label for="model">Model Selection</label>
                     <select id="model">
-                        <option value="flux">Flux (通用型)</option>
-                        <option value="FLUX-3D">FLUX-3D (3D渲染风格)</option>
-                        <option value="FLUX-PRO">FLUX-PRO (专业级质量)</option>
-                        <option value="Flux-realism">Flux-realism (写实风格)</option>
-                        <option value="Flux-anime">Flux-anime (动漫风格)</option>
-                        <option value="Flux-cablyai">Flux-cablyai (特殊风格)</option>
-                        <option value="turbo">Turbo (快速生成)</option>
+                        <option value="flux">Flux (General Purpose)</option>
+                        <option value="FLUX-3D">FLUX-3D (3D Rendering Style)</option>
+                        <option value="FLUX-PRO">FLUX-PRO (Professional Quality)</option>
+                        <option value="Flux-realism">Flux-realism (Realistic Style)</option>
+                        <option value="Flux-anime">Flux-anime (Anime Style)</option>
+                        <option value="Flux-cablyai">Flux-cablyai (Special Style)</option>
+                        <option value="turbo">Turbo (Fast Generation)</option>
                     </select>
-                    <div class="model-info" id="model-info">Flux: 通用型模型，适合大多数场景</div>
+                    <div class="model-info" id="model-info">Flux: General purpose model, suitable for most scenarios</div>
                 </div>
                 
                 <div class="form-group">
                     <div class="form-row" style="display: flex; gap: 15px;">
                         <div style="flex: 1;">
-                            <label for="width">宽度</label>
+                            <label for="width">Width</label>
                             <input type="number" id="width" min="64" max="1920" step="8" value="720">
                         </div>
                         <div style="flex: 1;">
-                            <label for="height">高度</label>
+                            <label for="height">Height</label>
                             <input type="number" id="height" min="64" max="1920" step="8" value="1280">
                         </div>
                     </div>
-                    <div class="parameter-tips">提示：推荐使用8的倍数，最大尺寸取决于模型限制。</div>
+                    <div class="parameter-tips">Tip: Multiples of 8 recommended. Maximum size depends on model limitations.</div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="seed">种子值 (Seed)</label>
+                    <label for="seed">Seed Value</label>
                     <div style="display: flex; gap: 10px;">
                         <input type="number" id="seed" min="-1" max="2147483647" value="-1" style="flex: 1;">
-                        <button id="random-seed" style="padding: 12px 15px;">随机</button>
+                        <button id="random-seed" style="padding: 12px 15px;">Random</button>
                     </div>
-                    <div class="parameter-tips">提示：使用相同的种子值可以生成相似的图像，-1表示随机种子。</div>
+                    <div class="parameter-tips">Tip: Using the same seed value will generate similar images. -1 means random seed.</div>
                 </div>
                 
                 <div class="form-group">
                     <div class="checkbox-group">
                         <input type="checkbox" id="nologo">
-                        <label for="nologo" style="display: inline;">移除水印</label>
+                        <label for="nologo" style="display: inline;">Remove Watermark</label>
                     </div>
                     
                     <div class="checkbox-group">
                         <input type="checkbox" id="safe" checked>
-                        <label for="safe" style="display: inline;">安全模式 (过滤不适内容)</label>
+                        <label for="safe" style="display: inline;">Safe Mode (Filter inappropriate content)</label>
                     </div>
                 </div>
                 
                 <div class="button-group">
                     <button id="generate-btn" style="flex: 2;">
-                        <i>🎨</i> 生成图像
+                        <i>🎨</i> Generate Image
                     </button>
                     <button id="clear-btn" style="background: rgba(255, 255, 255, 0.1); box-shadow: none;">
-                        <i>🗑️</i> 清空
+                        <i>🗑️</i> Clear
                     </button>
                 </div>
             </div>
             
             <div class="preview-panel">
-                <h3 style="margin-bottom: 15px;">图像预览</h3>
+                <h3 style="margin-bottom: 15px;">Image Preview</h3>
                 <div class="image-container">
                     <div id="loading" class="loading-indicator" style="display: none;">
                         <div class="spinner"></div>
-                        <div>正在生成图像...</div>
+                        <div>Generating image...</div>
                     </div>
                     <img id="preview-image" style="display: none;">
                     <div id="placeholder-text" style="color: rgba(228, 241, 254, 0.5); text-align: center;">
-                        点击"生成图像"按钮开始创作
+                        Click "Generate Image" to start creating
                     </div>
                 </div>
                 
@@ -662,10 +662,10 @@
                 
                 <div class="image-actions" id="image-actions" style="display: none;">
                     <button id="download-btn">
-                        <i>💾</i> 下载图像
+                        <i>💾</i> Download Image
                     </button>
                     <button id="copy-prompt-btn">
-                        <i>📋</i> 复制提示词
+                        <i>📋</i> Copy Prompt
                     </button>
                 </div>
             </div>
@@ -673,15 +673,15 @@
         
         <div class="history-panel">
             <div class="history-title">
-                <h3>历史记录</h3>
+                <h3>History</h3>
                 <button id="clear-history-btn" style="background: rgba(255, 255, 255, 0.1); box-shadow: none; padding: 8px 15px;">
-                    清空历史
+                    Clear History
                 </button>
             </div>
             
             <div class="history-grid" id="history-container">
                 <div class="empty-history" id="empty-history">
-                    您的创作历史将显示在这里
+                    Your creation history will appear here
                 </div>
             </div>
         </div>
@@ -691,17 +691,17 @@
 
 <p style="text-align: center; padding: 2px 0;  color: inherit; font-family: 'Arial', sans-serif; font-size: 12px; line-height: 1.6; margin-top: 3px;">
   <span style="display: inline-block; position: relative; vertical-align: middle;">
-    © 2025 <a href="https://other.azad.asia" target="_blank" style="text-decoration: none;  color: inherit; transition: color 0.3s ease;">Azad的实验室</a>
+    © 2025 <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none;  color: inherit; transition: color 0.3s ease;">FreeAI English</a>
   </span>
   |
   <span style="display: inline-block; position: relative; vertical-align: middle;">
     <i class="fas fa-brain" style="margin-right: 5px;"></i>
-    基于 Pollinations.AI
+    Powered by Pollinations.AI
   </span>
   |
   <span style="display: inline-block; position: relative; vertical-align: middle;">
-    <a href="https://home.azad.asia/dashang" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.3s ease;">
-      <i class="fas fa-coffee" style="margin-right: 5px;"></i>请站长喝咖啡
+    <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.3s ease;">
+      <i class="fas fa-github" style="margin-right: 5px;"></i>GitHub Repository
     </a>
   </span>
 </p>
@@ -737,15 +737,15 @@
             const clearHistoryBtn = document.getElementById('clear-history-btn');
             const notification = document.getElementById('notification');
             
-            // 模型信息
+            // Model information
             const modelDescriptions = {
-                'flux': 'Flux: 通用型模型，适合大多数场景',
-                'FLUX-3D': 'FLUX-3D: 专为3D渲染风格优化的模型',
-                'FLUX-PRO': 'FLUX-PRO: 提供专业级质量的高级模型',
-                'Flux-realism': 'Flux-realism: 专注于写实风格的图像生成',
-                'Flux-anime': 'Flux-anime: 优化用于生成动漫风格的图像',
-                'Flux-cablyai': 'Flux-cablyai: 具有特殊艺术风格的模型',
-                'turbo': 'Turbo: 快速生成模型，速度优先'
+                'flux': 'Flux: General purpose model, suitable for most scenarios',
+                'FLUX-3D': 'FLUX-3D: Model optimized for 3D rendering style',
+                'FLUX-PRO': 'FLUX-PRO: Advanced model providing professional quality',
+                'Flux-realism': 'Flux-realism: Focused on generating realistic style images',
+                'Flux-anime': 'Flux-anime: Optimized for generating anime style images',
+                'Flux-cablyai': 'Flux-cablyai: Model with special artistic style',
+                'turbo': 'Turbo: Fast generation model, speed priority'
             };
             
             // 更新模型信息

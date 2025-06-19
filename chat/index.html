@@ -1197,7 +1197,7 @@
     <!-- Sidebar for conversations -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="sidebar-title"><a href="https://freeai.aihub.ren" style="text-decoration: none; color: inherit;"><span style="color:#0099ff"><b>FreeAI</b></span></a> <br><small> 基于 Pollinations.AI </small></div>
+            <div class="sidebar-title"><a href="https://freeai.aihub.ren" style="text-decoration: none; color: inherit;"><span style="color:#0099ff"><b>FreeAI</b></span></a> <br><small> Based on Pollinations.AI </small></div>
             <div style="display: flex; align-items: center;">
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
@@ -1208,12 +1208,12 @@
             </div>
         </div>
         <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="搜索会话...">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search conversations...">
             <i class="fas fa-search search-icon"></i>
         </div>
         <button class="new-chat-btn" id="newChatBtn">
             <i class="fas fa-plus"></i>
-            <span>新建会话</span>
+            <span>New Chat</span>
         </button>
         <style>
 .sci-fi-btn {
@@ -1277,7 +1277,7 @@
     <span class="glowing-border"></span>
 <i class="fas fa-circle-arrow-left"></i>
  &nbsp;
-    返回首页
+    Back to Home
 </a>
         <div class="chat-list" id="chatList">
             <!-- Chat history items will be dynamically added here -->
@@ -1313,10 +1313,10 @@
                 </div>
             </div>
             <div class="action-buttons">
-                <button class="clear-btn" id="clearChatBtn" title="清除对话">
+                <button class="clear-btn" id="clearChatBtn" title="Clear Chat">
                     <i class="fas fa-broom"></i>
                 </button>
-                <button class="export-btn" id="exportChatBtn" title="导出对话">
+                <button class="export-btn" id="exportChatBtn" title="Export Chat">
                     <i class="fas fa-download"></i>
                 </button>
             </div>
@@ -1325,7 +1325,7 @@
             <!-- Messages will be dynamically added here -->
         </div>
         <div class="input-area">
-            <textarea class="message-input" id="messageInput" placeholder="输入消息开始对话..." rows="1"></textarea>
+            <textarea class="message-input" id="messageInput" placeholder="Enter message to start chat..." rows="1"></textarea>
             <button class="send-btn" id="sendBtn">
                 <i class="fas fa-paper-plane"></i>
             </button>
@@ -1392,7 +1392,7 @@
 
 <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">设置</h5>
+                <h5 class="modal-title">Settings</h5>
                 <button class="close-modal" id="closeSettingsModal">
                 </button>
             </div>
@@ -1402,45 +1402,44 @@
 
 <hr style="margin: 20px 0; border-top: 1px solid var(--border-color);">
 <div class="about-section">
-    <h5 style="color: var(--tech-dark-blue); margin-bottom: 14px;">关于</h5>
+    <h5 style="color: var(--tech-dark-blue); margin-bottom: 14px;">About</h5>
 
     <p style="font-size: 14px; color: var(--text-color);">
         <i class="fas fa-info-circle" style="color: var(--neon-blue);"></i> 
-        本项目由 <a href="https://other.azad.asia" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Azad</a> 开发 
+        Original project by <a href="https://other.azad.asia" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Azad</a> 
       &nbsp; &nbsp; <i class="fas fa-robot" style="color: var(--neon-blue);"></i>
-        基于 <a href="https://pollinations.ai" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Pollinations.AI</a> 提供服务
+        Powered by <a href="https://pollinations.ai" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Pollinations.AI</a>
 <br><br>
-<i class="fab fa-github" style="color: var(--neon-blue);"></i>项目开源地址
-        <a href="https://github.com/Azad-sl/FreeAI" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Github</a> &nbsp; &nbsp; 
-<i class="fas fa-medal" style="color: var(--neon-blue);"></i> 给站长
-        <a href="https://home.azad.asia/dashang" target="_blank" style="color: var(--tech-blue); text-decoration: none;">加个鸡腿</a> 
+<i class="fab fa-github" style="color: var(--neon-blue);"></i> Source Code
+        <a href="https://github.com/YourUsername/FreeAI-English" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Github</a> &nbsp; &nbsp; 
+<i class="fas fa-medal" style="color: var(--neon-blue);"></i> Support
+        <a href="https://github.com/YourUsername/FreeAI-English" target="_blank" style="color: var(--tech-blue); text-decoration: none;">This Project</a> 
     </p>
 </div>
 <br>
 
-                    <label class="form-label" for="systemPrompt">系统提示词</label>
-                    <textarea class="form-control" id="systemPrompt" rows="5" placeholder="输入系统提示词..."></textarea>
+                    <label class="form-label" for="systemPrompt">System Prompt</label>
+                    <textarea class="form-control" id="systemPrompt" rows="5" placeholder="Enter system prompt..."></textarea>
                     <div class="prompt-examples">
-                        <div class="prompt-example" data-prompt="You are a helpful assistant that provides accurate and concise information.">通用AI助手</div>
-                        <div class="prompt-example" data-prompt="You are a creative writer who helps craft engaging stories and content.">创意写作者</div>
-                        <div class="prompt-example" data-prompt="You are a programming expert who provides clear code examples and explanations.">代码写作助手</div>
-                        <div class="prompt-example" data-prompt="You are a language learning tutor who helps with translations and grammar.">语言学习导师</div>
-                        <div class="prompt-example" data-prompt="You are a data analyst who helps interpret and visualize information.">数据分析员</div>
-                        <div class="prompt-example" data-prompt="I want you to act as a debater. I will provide you with some topics related to current events and your task is to research both sides of the debates, present valid arguments for each side, refute opposing points of view, and draw persuasive conclusions based on evidence. Your goal is to help people come away from the discussion with increased knowledge and insight into the topic at hand. My first request is 【I want an opinion piece about Deno.】">辩手</div>
-                        <div class="prompt-example" data-prompt="I want you to act as a poet. You will create poems that evoke emotions and have the power to stir people's soul. Write on any topic or theme but make sure your words convey the feeling you are trying to express in beautiful yet meaningful ways. You can also come up with short verses that are still powerful enough to leave an imprint in readers' minds. My first request is 【I need a poem about love.】">诗人</div>
-                        <div class="prompt-example" data-prompt="I want you to act as a philosopher. I will provide some topics or questions related to the study of philosophy, and it will be your job to explore these concepts in depth. This could involve conducting research into various philosophical theories, proposing new ideas or finding creative solutions for solving complex problems. My first request is 【I need help developing an ethical framework for decision making.】">哲学家</div>
-                        <div class="prompt-example" data-prompt="I want you to act as a mental health adviser. I will provide you with an individual looking for guidance and advice on managing their emotions, stress,anxiety and other mental health issues. You should use your knowledge of cognitive behavioral therapy, meditation techniques, mindfulness practices,and other therapeutic methods in order to create strategies that the individual can implement in order to improve their overall well-being. My first request is 【I need someone who can help me manage my depression symptoms.】">心理健康顾问</div>
-                        <div class="prompt-example" data-prompt="Please acknowledge my following request. Please respond to me as a product manager. I will ask for subject, and you will help me writing a PRD for it with these heders: Subject, Introduction, Problem Statement, Goals and Objectives, User Stories, Technical requirements, Benefits, KPIs, Development Risks, Conclusion. Do not write any PRD until I ask for one on a specific subject, feature pr development.">产品经理</div>
-<div class="prompt-example" data-prompt="你是一位文本大纲生成专家，擅长根据用户的需求创建一个有条理且易于扩展成完整文章的大纲，你拥有强大的主题分析能力，能准确提取关键信息和核心要点。具备丰富的文案写作知识储备，熟悉各种文体和题材的文案大纲构建方法。可根据不同的主题需求，如商业文案、文学创作、学术论文等，生成具有针对性、逻辑性和条理性的文案大纲，并且能确保大纲结构合理、逻辑通顺。该大纲应该包含以下部分：引言：介绍主题背景，阐述撰写目的，并吸引读者兴趣。主体部分：第一段落：详细说明第一个关键点或论据，支持观点并引用相关数据或案例。第二段落：深入探讨第二个重点，继续论证或展开叙述，保持内容的连贯性和深度。第三段落：如果有必要，进一步讨论其他重要方面，或者提供不同的视角和证据。结论：总结所有要点，重申主要观点，并给出有力的结尾陈述，可以是呼吁行动、提出展望或其他形式的收尾。创意性标题：为文章构思一个引人注目的标题，确保它既反映了文章的核心内容又能激发读者的好奇心。">文案大纲生成</div>
-<div class="prompt-example" data-prompt="你是一位大模型提示词生成专家，请根据用户的需求编写一个智能助手的提示词，来指导大模型进行内容生成，要求：1. 以 Markdown 格式输出2. 贴合用户需求，描述智能助手的定位、能力、知识储备3. 提示词应清晰、精确、易于理解，在保持质量的同时，尽可能简洁4. 只输出提示词，不要输出多余解释">提示词生成</div>
-<div class="prompt-example" data-prompt="你是一个中英文翻译专家，将用户输入的中文翻译成英文，或将用户输入的英文翻译成中文。对于非中文内容，它将提供中文翻译结果。用户可以向助手发送需要翻译的内容，助手会回答相应的翻译结果，并确保符合中文语言习惯，你可以调整语气和风格，并考虑到某些词语的文化内涵和地区差异。同时作为翻译家，需将原文翻译成具有信达雅标准的译文。【信】即忠实于原文的内容与意图；【达】意味着译文应通顺易懂，表达清晰；【雅】 则追求译文的文化审美和语言的优美。目标是创作出既忠于原作精神，又符合目标语言文化和读者审美的翻译。">中英翻译专家</div>
-
+                        <div class="prompt-example" data-prompt="You are a helpful assistant that provides accurate and concise information.">General AI Assistant</div>
+                        <div class="prompt-example" data-prompt="You are a creative writer who helps craft engaging stories and content.">Creative Writer</div>
+                        <div class="prompt-example" data-prompt="You are a programming expert who provides clear code examples and explanations.">Code Assistant</div>
+                        <div class="prompt-example" data-prompt="You are a language learning tutor who helps with translations and grammar.">Language Tutor</div>
+                        <div class="prompt-example" data-prompt="You are a data analyst who helps interpret and visualize information.">Data Analyst</div>
+                        <div class="prompt-example" data-prompt="I want you to act as a debater. I will provide you with some topics related to current events and your task is to research both sides of the debates, present valid arguments for each side, refute opposing points of view, and draw persuasive conclusions based on evidence. Your goal is to help people come away from the discussion with increased knowledge and insight into the topic at hand. My first request is 【I want an opinion piece about Deno.】">Debater</div>
+                        <div class="prompt-example" data-prompt="I want you to act as a poet. You will create poems that evoke emotions and have the power to stir people's soul. Write on any topic or theme but make sure your words convey the feeling you are trying to express in beautiful yet meaningful ways. You can also come up with short verses that are still powerful enough to leave an imprint in readers' minds. My first request is 【I need a poem about love.】">Poet</div>
+                        <div class="prompt-example" data-prompt="I want you to act as a philosopher. I will provide some topics or questions related to the study of philosophy, and it will be your job to explore these concepts in depth. This could involve conducting research into various philosophical theories, proposing new ideas or finding creative solutions for solving complex problems. My first request is 【I need help developing an ethical framework for decision making.】">Philosopher</div>
+                        <div class="prompt-example" data-prompt="I want you to act as a mental health adviser. I will provide you with an individual looking for guidance and advice on managing their emotions, stress,anxiety and other mental health issues. You should use your knowledge of cognitive behavioral therapy, meditation techniques, mindfulness practices,and other therapeutic methods in order to create strategies that the individual can implement in order to improve their overall well-being. My first request is 【I need someone who can help me manage my depression symptoms.】">Mental Health Advisor</div>
+                        <div class="prompt-example" data-prompt="Please acknowledge my following request. Please respond to me as a product manager. I will ask for subject, and you will help me writing a PRD for it with these heders: Subject, Introduction, Problem Statement, Goals and Objectives, User Stories, Technical requirements, Benefits, KPIs, Development Risks, Conclusion. Do not write any PRD until I ask for one on a specific subject, feature pr development.">Product Manager</div>
+                        <div class="prompt-example" data-prompt="You are an outline generation expert, skilled at creating well-structured outlines based on user requirements that can easily be expanded into complete articles. You have strong topic analysis abilities and can accurately extract key information and core points. You're familiar with various writing styles and outline construction methods for different types of content such as business copy, creative writing, and academic papers. The outline should include: Introduction (topic background, purpose, reader hook), Body (key points with supporting data, logical flow between sections, different perspectives), Conclusion (summary of points, restatement of main idea, compelling closing statement), and a Creative Title that reflects the core content while sparking curiosity.">Outline Creator</div>
+                        <div class="prompt-example" data-prompt="You are a prompt engineering expert. Please write a prompt for an AI assistant based on the user's requirements with the following guidelines: 1. Output in Markdown format 2. Align with user needs by describing the assistant's role, capabilities, and knowledge base 3. Make the prompt clear, precise, and easy to understand while keeping it concise 4. Only output the prompt without additional explanations">Prompt Generator</div>
+                        <div class="prompt-example" data-prompt="You are an expert translator working between English and other languages. You translate user input with high accuracy while maintaining natural expression in the target language. You adjust tone and style appropriately and consider cultural connotations and regional differences in your translations. As a translator, you aim to create translations that are faithful to the original content and intent, clear and easily understood by readers, and aesthetically pleasing in the target language. Your goal is to produce translations that are true to the spirit of the original while being culturally appropriate and appealing to readers in the target language.">Language Translator</div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary" id="cancelSettingsBtn">取消</button>
-                <button class="btn btn-primary" id="saveSettingsBtn">保存</button>
+                <button class="btn btn-secondary" id="cancelSettingsBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveSettingsBtn">Save</button>
             </div>
         </div>
     </div>
