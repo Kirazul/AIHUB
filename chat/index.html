@@ -2067,7 +2067,33 @@
             return url;
         }
 
-        // Enhanced sendMessage function to handle image generation requests
+        // Improved function to extract the image generation prompt with better context understanding
+        function extractImagePrompt(text, conversation) {
+            // Remove common image generation request phrases
+            let cleanedPrompt = text.replace(/generate an image of|generate image of|draw|create an image of|show me an image of|picture of|draw me|create a picture of|visualize|can you generate|can you draw|can you create|generate image|make an image of/gi, '').trim();
+            
+            // If the prompt is too short (like just "it"), look at previous message context
+            if (cleanedPrompt.length < 5 || /^(it|that|this|one|something)$/i.test(cleanedPrompt)) {
+                // Find the previous user message to get context
+                const messages = conversation.messages;
+                for (let i = messages.length - 2; i >= 0; i--) {
+                    if (messages[i].role === 'user') {
+                        // Combine with previous message for better context
+                        // But avoid including command phrases from the current message
+                        const previousContent = messages[i].content;
+                        // Avoid using previous message if it also contains image generation commands
+                        if (!isImageGenerationRequest(previousContent)) {
+                            cleanedPrompt = previousContent;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            return cleanedPrompt;
+        }
+
+        // Enhanced sendMessage function to handle image generation requests with better context
         async function sendMessage() {
             const userInput = elements.messageInput.value.trim();
             if (!userInput || state.isAiTyping) return;
@@ -2121,7 +2147,7 @@
                 // If this is an image request, handle it differently
                 if (isImageRequest) {
                     // Create a response that includes both text and an image
-                    const imagePrompt = userInput.replace(/generate an image of|generate image of|draw|create an image of|show me an image of|picture of|draw me|create a picture of|visualize|can you generate|can you draw|can you create/gi, '').trim();
+                    const imagePrompt = extractImagePrompt(userInput, conversation);
                     
                     // Generate the image URL
                     const imageUrl = await generateImage(imagePrompt);
