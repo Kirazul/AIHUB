@@ -2,79 +2,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free AI Chat</title>
+    <title>AI HUB Chat Assistant</title>
      <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Variables */
         :root {
-            --primary-color: #0099ff;
+            --neon-pink: #ff2a6d;
+            --neon-purple: #ae5ff8;
+            --neon-mint: #3a86ff;
+            --neon-coral: #ff7e67;
+            --neon-lavender: #b892ff;
+            --neon-sage: #c9f0d6;
+            --neon-amber: #ffb344;
+            --dark-bg: #030a19;
+            --darker-bg: #02030a;
+            --accent-color: #ff2a6d;
+            --star-color: #ffffff;
+            --nebula-color1: rgba(174, 95, 248, 0.25);
+            --nebula-color2: rgba(184, 146, 255, 0.25);
+            --nebula-color3: rgba(255, 42, 109, 0.25);
+            --nebula-color4: rgba(58, 134, 255, 0.2);
+            --nebula-color5: rgba(255, 179, 68, 0.15);
+            
+            --primary-color: #3a86ff;
             --secondary-color: #F5F5F5;
             --text-color: #333;
             --light-text: #666;
-            --bg-color: #EDEDED;
+            --bg-color: #030a19;
             --white: #fff;
-            --border-color: #ddd;
-            --user-msg-color: #e1f5fe;
-            --ai-msg-color: var(--white);
-            --shadow: 0 2px 10px rgba(0, 153, 255, 0.15);
-            --wechat-green: #0099ff;
+            --border-color: #444;
+            --user-msg-color: rgba(58, 134, 255, 0.15);
+            --ai-msg-color: rgba(184, 146, 255, 0.15);      
+            --shadow: 0 2px 10px rgba(184, 146, 255, 0.15);
             --border-radius: 8px;
             --chat-font-size: 14px; /* Default font size for chat */
-            --tech-blue: #0099ff;
-            --tech-dark-blue: #006bb3;
+            --tech-blue: #3a86ff;
+            --tech-dark-blue: #2563eb;
             --tech-light-blue: #e1f5fe;
             --tech-grey: #f0f0f0;
-            /* Sci-fi theme additions */
-            --neon-blue: #00c3ff;
-            --neon-purple: #9d00ff;
-            --neon-cyan: #00fff2;
-            --tech-bg-dark: #121a29;
-            --tech-bg-light: #f0f4ff;
-            --hologram-blue: rgba(0, 195, 255, 0.1);
-            --glow-shadow: 0 0 10px rgba(0, 195, 255, 0.4);
-            --matrix-green: #00ff41;
-            --cyber-yellow: #ffdd00;
-            --digital-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e88e5' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            --hologram-blue: rgba(58, 134, 255, 0.1);
+            --glow-shadow: 0 0 10px rgba(58, 134, 255, 0.4);
+            --digital-pattern: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233a86ff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
         /* Dark theme */
         [data-theme="dark"] {
-            --primary-color: #0099ff;
-            --secondary-color: #2A2A2A;
+            --primary-color: #3a86ff;
+            --secondary-color: #1A1A1A;
             --text-color: #E0E0E0;
             --light-text: #BBBBBB;
-            --bg-color: #1A1A1A;
-            --white: #2A2A2A;
+            --bg-color: #030a19;
+            --white: #1A1A1A;
             --border-color: #444;
-            --user-msg-color: #004d80;
-            --ai-msg-color: #3A3A3A;
-            --shadow: 0 2px 10px rgba(0, 153, 255, 0.3);
+            --user-msg-color: rgba(58, 134, 255, 0.15);
+            --ai-msg-color: rgba(184, 146, 255, 0.15);
+            --shadow: 0 2px 10px rgba(184, 146, 255, 0.3);
             /* Sci-fi dark theme */
-            --hologram-blue: rgba(0, 195, 255, 0.15);
-            --tech-bg-dark: #131c2e;
+            --hologram-blue: rgba(58, 134, 255, 0.15);
+            --tech-bg-dark: #030a19;
         }
         /* Base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Space Grotesk', 'Inter', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:wght@300..700&display=swap');
+        
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             height: 100vh;
             display: flex;
             overflow: hidden;
-            background-image:
-                radial-gradient(var(--border-color) 1px, transparent 1px),
-                var(--digital-pattern);
-            background-size: 25px 25px, 60px 60px;
             position: relative;
+            font-family: 'Inter', 'PingFang SC', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-image: 
+                radial-gradient(1px circle at 20px 20px, rgba(255, 255, 255, 0.1) 1px, transparent 0),
+                radial-gradient(1px circle at 60px 60px, rgba(255, 255, 255, 0.1) 1px, transparent 0),
+                radial-gradient(1px circle at 100px 40px, rgba(255, 255, 255, 0.1) 1px, transparent 0),
+                radial-gradient(circle at 30% 20%, var(--nebula-color1) 0%, transparent 25%),
+                radial-gradient(circle at 70% 60%, var(--nebula-color2) 0%, transparent 25%),
+                radial-gradient(circle at 20% 80%, var(--nebula-color3) 0%, transparent 30%),
+                radial-gradient(circle at 80% 10%, var(--nebula-color4) 0%, transparent 20%);
+            background-size: 120px 120px, 100px 100px, 200px 200px, 600px 600px, 600px 600px, 600px 600px, 600px 600px;
+            background-position: 0 0, 0 0, 0 0, center center, center center, center center, center center;
         }
-        /* Tech circuit lines overlay */
-        body::after {
+        /* Star overlay */
+        body::before {
             content: "";
             position: fixed;
             top: 0;
@@ -82,10 +99,20 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            background-image: linear-gradient(to right, transparent 49.5%, rgba(0, 153, 255, 0.03) 50%, transparent 50.5%),
-                              linear-gradient(to bottom, transparent 49.5%, rgba(0, 153, 255, 0.03) 50%, transparent 50.5%);
-            background-size: 40px 40px;
+            background-image: 
+                radial-gradient(1px circle at 25px 25px, var(--star-color) 1px, transparent 0),
+                radial-gradient(1.5px circle at 75px 75px, var(--star-color) 1px, transparent 0),
+                radial-gradient(1px circle at 125px 125px, var(--star-color) 1px, transparent 0),
+                radial-gradient(1.5px circle at 175px 175px, var(--star-color) 1px, transparent 0);
+            background-size: 200px 200px;
+            opacity: 0.6;
             z-index: -1;
+            animation: twinkle 8s infinite alternate;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
         }
         /* Hide scrollbars but keep scrolling functionality */
         .chat-list, .chat-area, .dropdown-menu, .message-input {
@@ -128,7 +155,7 @@
             background-color: var(--secondary-color);
             position: relative;
             overflow: hidden;
-            background-image: linear-gradient(90deg, rgba(0, 153, 255, 0.05) 0%, transparent 100%);
+            background-image: linear-gradient(90deg, rgba(174, 95, 248, 0.05) 0%, transparent 100%);
         }
         /* Add pulsing glow behind title */
         .sidebar-header::before {
@@ -136,7 +163,7 @@
             position: absolute;
             width: 100px;
             height: 100px;
-            background: radial-gradient(circle, var(--neon-blue) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--neon-lavender) 0%, transparent 70%);
             opacity: 0.3;
             top: -50px;
             left: -50px;
@@ -148,10 +175,15 @@
             font-weight: bold;
             letter-spacing: 0.5px;
             position: relative;
-            text-shadow: 0 0 5px rgba(0, 153, 255, 0.3);
+            text-shadow: 0 0 5px rgba(184, 146, 255, 0.3);
         }
         .sidebar-title a span {
             position: relative;
+            background: linear-gradient(90deg, var(--neon-mint), var(--neon-lavender));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Space Grotesk', sans-serif;
         }
         .sidebar-title a span::after {
             content: "";
@@ -160,7 +192,7 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            background: linear-gradient(90deg, transparent, var(--neon-mint), transparent);
             animation: scan-line 3s infinite;
         }
         @keyframes scan-line {
@@ -184,8 +216,8 @@
             z-index: 1;
         }
         .theme-toggle:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
+            color: var(--neon-mint);
+            text-shadow: 0 0 5px var(--neon-mint);
         }
         .clear-all-btn {
             color: var(--light-text);
@@ -198,8 +230,8 @@
             z-index: 1;
         }
         .clear-all-btn:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
+            color: var(--neon-mint);
+            text-shadow: 0 0 5px var(--neon-mint);
         }
         .search-container {
             padding: 15px 15px 5px 15px;
@@ -216,9 +248,9 @@
             background-image: linear-gradient(to right, rgba(0, 153, 255, 0.03), transparent);
         }
         .search-input:focus {
-            border-color: var(--neon-blue);
+            border-color: var(--neon-mint);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(0, 195, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(118, 249, 195, 0.15);
         }
         .search-icon {
             position: absolute;
@@ -254,7 +286,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--tech-blue), var(--neon-cyan));
+            background: linear-gradient(45deg, var(--neon-mint), var(--neon-sage), var(--neon-lavender));
             z-index: -1;
             border-radius: var(--border-radius);
             opacity: 0;
@@ -300,9 +332,9 @@
             box-shadow: 0 2px 8px rgba(0, 153, 255, 0.1);
         }
         .chat-item.active {
-            background-color: var(--tech-light-blue);
-            border-left: 2px solid var(--neon-blue);
-            box-shadow: inset 0 0 8px rgba(0, 153, 255, 0.1);
+            background-color: rgba(58, 134, 255, 0.05);
+            border-left: 2px solid var(--neon-mint);
+            box-shadow: inset 0 0 8px rgba(58, 134, 255, 0.1);
         }
         .chat-item-icon {
             margin-right: 12px;
@@ -362,11 +394,11 @@
         }
         .chat-item-pin.pinned {
             visibility: visible;
-            color: var(--neon-blue);
-            text-shadow: 0 0 3px rgba(0, 195, 255, 0.5);
+            color: var(--neon-mint);
+            text-shadow: 0 0 3px rgba(58, 134, 255, 0.5);
         }
         .chat-item-pin:hover {
-            color: var(--neon-blue);
+            color: var(--neon-mint);
             transform: scale(1.1);
         }
         .chat-item-delete:hover {
@@ -408,7 +440,7 @@
             left: 0;
             right: 0;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            background: linear-gradient(90deg, transparent, var(--neon-mint), transparent);
             opacity: 0.5;
         }
         .model-selection {
@@ -429,8 +461,8 @@
             position: relative;
         }
         .sidebar-toggle-btn:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px rgba(0, 195, 255, 0.5);
+            color: var(--neon-mint);
+            text-shadow: 0 0 5px rgba(58, 134, 255, 0.5);
         }
         .dropdown {
             position: relative;
@@ -457,14 +489,14 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            background: linear-gradient(90deg, transparent, var(--neon-mint), transparent);
             transform: scaleX(0);
             transform-origin: center;
             transition: transform 0.3s ease;
         }
         .dropdown-toggle:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 0 2px rgba(0, 195, 255, 0.1);
+            border-color: var(--neon-mint);
+            box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.1);
         }
         .dropdown-toggle:hover::after {
             transform: scaleX(1);
@@ -497,11 +529,11 @@
         .dropdown-group {
             padding: 5px 10px;
             font-weight: bold;
-            color: var(--neon-blue);
+            color: var(--neon-mint);
             border-bottom: 1px solid var(--border-color);
             margin-top: 5px;
             font-size: 0.85em;
-            text-shadow: 0 0 3px rgba(0, 195, 255, 0.3);
+            text-shadow: 0 0 3px rgba(118, 249, 195, 0.3);
         }
         .dropdown-item {
             padding: 8px 15px;
@@ -517,7 +549,7 @@
             top: 0;
             height: 100%;
             width: 3px;
-            background-color: var(--neon-blue);
+            background-color: var(--neon-mint);
             transform: scaleY(0);
             transition: transform 0.2s ease;
         }
@@ -538,8 +570,8 @@
             position: relative;
         }
         .settings-btn:hover, .font-size-btn:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px rgba(0, 195, 255, 0.5);
+            color: var(--neon-mint);
+            text-shadow: 0 0 5px rgba(118, 249, 195, 0.5);
             transform: rotate(15deg);
         }
         .font-size-controls {
@@ -587,7 +619,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan), var(--neon-blue));
+            background: linear-gradient(90deg, var(--neon-mint), var(--neon-lavender), var(--neon-mint));
             z-index: 1;
         }
         .modal-content::after {
@@ -610,8 +642,8 @@
         .modal-title {
             font-size: 18px;
             font-weight: bold;
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px rgba(0, 195, 255, 0.3);
+            color: var(--neon-mint);
+            text-shadow: 0 0 5px rgba(118, 249, 195, 0.3);
         }
         .close-modal {
             background: none;
@@ -623,8 +655,8 @@
             z-index: 2;
         }
         .close-modal:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px rgba(0, 195, 255, 0.5);
+            color: var(--neon-mint);
+            text-shadow: 0 0 5px rgba(118, 249, 195, 0.5);
             transform: rotate(90deg);
         }
         .modal-body {
@@ -650,7 +682,7 @@
             left: 0;
             width: 100%;
             height: 1px;
-            background: linear-gradient(90deg, var(--neon-blue), transparent);
+            background: linear-gradient(90deg, var(--neon-mint), transparent);
         }
         .form-control {
             width: 100%;
@@ -676,14 +708,17 @@
         }
         .prompt-example {
             font-size: 12px;
-            padding: 5px 10px;
-            background-color: var(--tech-grey);
+            padding: 8px 12px;
+            background-color: rgba(58, 134, 255, 0.2);
             border-radius: var(--border-radius);
             cursor: pointer;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(58, 134, 255, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            color: #ffffff;
+            font-weight: 500;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         .prompt-example::before {
             content: '';
@@ -692,14 +727,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, transparent, rgba(0, 195, 255, 0.1), transparent);
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
             transform: translateX(-100%);
             transition: transform 0.5s ease;
         }
         .prompt-example:hover {
-            background-color: var(--tech-light-blue);
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 5px rgba(0, 195, 255, 0.3);
+            background-color: rgba(58, 134, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 10px rgba(58, 134, 255, 0.4);
             transform: translateY(-2px);
         }
         .prompt-example:hover::before {
@@ -851,7 +886,7 @@
             left: -2px;
             width: calc(100% + 4px);
             height: calc(100% + 4px);
-            background: linear-gradient(45deg, var(--neon-blue), transparent, var(--neon-cyan));
+            background: linear-gradient(45deg, var(--neon-mint), transparent, var(--neon-lavender));
             border-radius: inherit;
             z-index: -1;
             opacity: 0.3;
@@ -871,7 +906,7 @@
             background-color: rgba(0, 0, 0, 0.05);
             padding: 2px 4px;
             border-radius: 3px;
-            border-left: 2px solid var(--neon-blue);
+            border-left: 2px solid var(--neon-mint);
         }
         .message-text pre {
             background-color: rgba(0, 0, 0, 0.05);
@@ -883,9 +918,9 @@
             font-family: 'Courier New', monospace;
             white-space: pre-wrap;
             word-break: break-all;
-            border-left: 3px solid var(--neon-blue);
-            box-shadow: inset 0 0 10px rgba(0, 153, 255, 0.05);
-            background-image: linear-gradient(to bottom, rgba(0, 153, 255, 0.03), transparent);
+            border-left: 3px solid var(--neon-mint);
+            box-shadow: inset 0 0 10px rgba(118, 249, 195, 0.05);
+            background-image: linear-gradient(to bottom, rgba(118, 249, 195, 0.03), transparent);
         }
         .code-preview-btn {
             display: inline-block;
@@ -1191,13 +1226,52 @@
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
+        /* Tech grid overlay */
+        .tech-grid {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image:
+            linear-gradient(rgba(118, 249, 195, 0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(118, 249, 195, 0.03) 1px, transparent 1px);
+          background-size: 20px 20px;
+          pointer-events: none;
+          z-index: -1;
+        }
+        /* Floating particles */
+        .particles {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: -1;
+        }
+        .particle {
+          position: absolute;
+          width: 3px;
+          height: 3px;
+          background: var(--neon-mint);
+          border-radius: 50%;
+          opacity: 0.3;
+          animation: float 20s infinite linear;
+        }
+        @keyframes float {
+          0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+          10% { opacity: 0.3; }
+          90% { opacity: 0.3; }
+          100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
     </style>
 </head>
-<body class="sidebar-hidden">
+<body class="sidebar-hidden" data-theme="dark">
     <!-- Sidebar for conversations -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <div class="sidebar-title"><a href="https://freeai.aihub.ren" style="text-decoration: none; color: inherit;"><span style="color:#0099ff"><b>FreeAI</b></span></a> <br><small> Based on Pollinations.AI </small></div>
+            <div class="sidebar-title"><a href="https://kirazul.github.io/FreeApi" style="text-decoration: none; color: inherit;"><span><b>AI HUB</b></span></a> <br><small> Made with ❤️ by Kira </small></div>
             <div style="display: flex; align-items: center;">
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
@@ -1272,7 +1346,7 @@
         }
 </style>
 
-<a href="https://freeai.aihub.ren" class="sci-fi-btn" style="text-decoration: none; font-size: 14px;"">
+<a href="https://kirazul.github.io/FreeApi" class="sci-fi-btn" style="text-decoration: none; font-size: 14px;">
     <span class="glowing-border"></span>
     <span class="glowing-border"></span>
 <i class="fas fa-circle-arrow-left"></i>
@@ -1331,56 +1405,6 @@
             </button>
         </div>
 </div>
-<style>
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-@keyframes glow {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-/* Tech grid overlay */
-.tech-grid {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image:
-    linear-gradient(rgba(0, 153, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 153, 255, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px;
-  pointer-events: none;
-  z-index: -1;
-}
-/* Floating particles */
-.particles {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-}
-.particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: var(--neon-blue);
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: float 20s infinite linear;
-}
-@keyframes float {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 0.3; }
-  90% { opacity: 0.3; }
-  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-}
-</style>
 <!-- Tech grid overlay -->
 <div class="tech-grid"></div>
 <!-- Floating particles -->
@@ -1402,18 +1426,18 @@
 
 <hr style="margin: 20px 0; border-top: 1px solid var(--border-color);">
 <div class="about-section">
-    <h5 style="color: var(--tech-dark-blue); margin-bottom: 14px;">About</h5>
+    <h5 style="color: var(--neon-mint); margin-bottom: 14px;">About</h5>
 
     <p style="font-size: 14px; color: var(--text-color);">
-        <i class="fas fa-info-circle" style="color: var(--neon-blue);"></i> 
-        Original project by <a href="https://other.azad.asia" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Azad</a> 
-      &nbsp; &nbsp; <i class="fas fa-robot" style="color: var(--neon-blue);"></i>
-        Powered by <a href="https://pollinations.ai" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Pollinations.AI</a>
+        <i class="fas fa-info-circle" style="color: var(--neon-mint);"></i> 
+        Original project by <a href="https://other.azad.asia" target="_blank" style="color: var(--neon-mint); text-decoration: none;">Azad</a> 
+      &nbsp; &nbsp; <i class="fas fa-robot" style="color: var(--neon-mint);"></i>
+        Powered by <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="color: var(--neon-mint); text-decoration: none;">AI HUB</a>
 <br><br>
-<i class="fab fa-github" style="color: var(--neon-blue);"></i> Source Code
-        <a href="https://github.com/YourUsername/FreeAI-English" target="_blank" style="color: var(--tech-blue); text-decoration: none;">Github</a> &nbsp; &nbsp; 
-<i class="fas fa-medal" style="color: var(--neon-blue);"></i> Support
-        <a href="https://github.com/YourUsername/FreeAI-English" target="_blank" style="color: var(--tech-blue); text-decoration: none;">This Project</a> 
+<i class="fab fa-github" style="color: var(--neon-mint);"></i> Source Code
+        <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="color: var(--neon-mint); text-decoration: none;">Github</a> &nbsp; &nbsp; 
+<i class="fas fa-medal" style="color: var(--neon-mint);"></i> Support
+        <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="color: var(--neon-mint); text-decoration: none;">This Project</a> 
     </p>
 </div>
 <br>
@@ -1612,7 +1636,7 @@
             chatCounter: 0,
             pinnedChats: [],
             isAiTyping: false,
-            currentTheme: 'light',
+            currentTheme: 'dark', // Default to dark theme
             chatFontSize: 14, // Default font size
             sidebarHidden: true // Default sidebar hidden (for first time users)
         };
@@ -1702,7 +1726,7 @@
                     chatCounter: parsedState.chatCounter || 0,
                     pinnedChats: parsedState.pinnedChats || [],
                     isAiTyping: false,
-                    currentTheme: parsedState.currentTheme || 'light',
+                    currentTheme: parsedState.currentTheme || 'dark',
                     chatFontSize: parsedState.chatFontSize || 14,
                     sidebarHidden: parsedState.sidebarHidden !== undefined ? parsedState.sidebarHidden : true
                 };
@@ -1990,58 +2014,199 @@
             });
             return prompt;
         }
-        // Send a message to the AI
+        // Function to check if conversation might be approaching token limits
+        function checkConversationLength(conversation) {
+            // A rough estimate of tokens - typically 1 token is about 4 chars in English
+            if (!conversation || !conversation.messages) return false;
+            
+            let totalChars = 0;
+            
+            // Count characters in system prompt
+            if (state.systemPrompt) {
+                totalChars += state.systemPrompt.length;
+            }
+            
+            // Count characters in all messages
+            conversation.messages.forEach(msg => {
+                totalChars += msg.content.length;
+            });
+            
+            // Estimate tokens (4 chars per token is a rough estimate)
+            const estimatedTokens = Math.floor(totalChars / 4);
+            
+            // If approaching danger zone (4000+ tokens might be risky)
+            if (estimatedTokens > 4000) {
+                // Show warning in the chat
+                const warningTimestamp = new Date();
+                conversation.messages.push({
+                    role: 'system',
+                    content: "Warning: This conversation is getting lengthy and might soon exceed the AI's token limit. Consider starting a new chat if you encounter errors.",
+                    timestamp: warningTimestamp.toISOString()
+                });
+                renderCurrentConversation();
+                scrollToBottom();
+                return true;
+            }
+            return false;
+        }
+        // Add function to detect if the user is requesting an image generation
+        function isImageGenerationRequest(text) {
+            // Check for common phrases that indicate image generation requests
+            const imageRequestPatterns = [
+                /generate (an |a |some )?image/i,
+                /create (an |a |some )?image/i,
+                /draw (an |a |some )?/i,
+                /picture of/i,
+                /generate (an |a |some )?picture/i,
+                /create (an |a |some )?picture/i,
+                /make (an |a |some )?image/i,
+                /visualize/i,
+                /show me (an |a |some )?image/i,
+                /can you (generate|create|draw|make|show)/i
+            ];
+            
+            return imageRequestPatterns.some(pattern => pattern.test(text));
+        }
+
+        // Function to generate an image using the Pollinations.ai API
+        async function generateImage(prompt) {
+            // Default parameters similar to those in the image generation page
+            const params = {
+                model: "flux", // Default model
+                width: 720,
+                height: 720,
+                seed: Math.floor(Math.random() * 2147483647),
+                nologo: true,
+                negative_prompt: "worst quality, blurry"
+            };
+            
+            // Construct the URL for the image generation API
+            let url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+            url += `?width=${params.width}&height=${params.height}&seed=${params.seed}&model=${params.model}`;
+            url += `&negative_prompt=${encodeURIComponent(params.negative_prompt)}`;
+            if (params.nologo) {
+                url += '&nologo=true';
+            }
+            
+            return url;
+        }
+
+        // Enhanced sendMessage function to handle image generation requests
         async function sendMessage() {
             const userInput = elements.messageInput.value.trim();
             if (!userInput || state.isAiTyping) return;
+            
             // Add user message to the conversation
             const conversation = getCurrentConversation();
             if (!conversation) return;
+            
             // Check if this is the first message and update the conversation title
             if (conversation.messages.length === 0) {
                 // Use the first message as the conversation title
                 conversation.title = userInput.length > 30 ? userInput.substring(0, 30) + '...' : userInput;
             }
+            
             // Add timestamp to the message
             const timestamp = new Date();
+            
             // Add user message
             conversation.messages.push({
                 role: 'user',
                 content: userInput,
                 timestamp: timestamp.toISOString()
             });
+            
             // Clear input and resize
             elements.messageInput.value = '';
             elements.messageInput.style.height = 'auto';
+            
             // Render the updated conversation
             renderCurrentConversation();
             saveState();
+            
+            // Check if conversation is getting too long
+            const isLengthWarning = checkConversationLength(conversation);
+            
             // Scroll to bottom
             scrollToBottom();
+            
+            // If we just added a warning, don't try to get AI response
+            if (isLengthWarning) {
+                return;
+            }
+            
             // Add typing indicator to show AI is responding
             addTypingIndicator();
-            // Create structured prompt with conversation history
-            const structuredPrompt = createStructuredPrompt(userInput, conversation);
-            // Encode the prompt for URL
-            const encodedPrompt = encodeURIComponent(structuredPrompt);
-            const apiUrl = `https://text.pollinations.ai/${encodedPrompt}?model=${state.currentModel.name}`;
+            
+            // Check if the message is requesting image generation
+            const isImageRequest = isImageGenerationRequest(userInput);
+            
             try {
+                // If this is an image request, handle it differently
+                if (isImageRequest) {
+                    // Create a response that includes both text and an image
+                    const imagePrompt = userInput.replace(/generate an image of|generate image of|draw|create an image of|show me an image of|picture of|draw me|create a picture of|visualize|can you generate|can you draw|can you create/gi, '').trim();
+                    
+                    // Generate the image URL
+                    const imageUrl = await generateImage(imagePrompt);
+                    
+                    // Create response with image
+                    const aiResponse = `Sure, I've generated an image based on your prompt: "${imagePrompt}"
+
+![Generated Image](${imageUrl})
+
+Is this what you were looking for? If you'd like changes to the image, you can ask for specific adjustments.`;
+                    
+                    // Remove typing indicator
+                    removeTypingIndicator();
+                    
+                    // Add the response to the conversation
+                    const responseTimestamp = new Date();
+                    conversation.messages.push({
+                        id: Date.now().toString(),
+                        role: 'assistant',
+                        content: aiResponse,
+                        model: state.currentModel.description,
+                        timestamp: responseTimestamp.toISOString()
+                    });
+                    
+                    // Update the UI
+                    renderCurrentConversation();
+                    scrollToBottom();
+                    saveState();
+                    
+                    return;
+                }
+                
+                // For non-image requests, continue with the normal text API flow
+                // Create structured prompt with conversation history
+                const structuredPrompt = createStructuredPrompt(userInput, conversation);
+                
+                // Encode the prompt for URL
+                const encodedPrompt = encodeURIComponent(structuredPrompt);
+                const apiUrl = `https://text.pollinations.ai/${encodedPrompt}?model=${state.currentModel.name}`;
+                
                 // Create a placeholder message for the AI's response
                 const aiMessageId = Date.now().toString();
+                
                 // Fetch the response
                 const response = await fetch(apiUrl);
+                
                 // Get the full response
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder();
                 let aiResponse = '';
+                
                 while (true) {
                     const { done, value } = await reader.read();
                     if (done) break;
                     const chunk = decoder.decode(value, { stream: true });
                     aiResponse += chunk;
                 }
+                
                 // Remove typing indicator and add the full response
                 removeTypingIndicator();
+                
                 // Add the full response
                 const responseTimestamp = new Date();
                 conversation.messages.push({
@@ -2051,18 +2216,29 @@
                     model: state.currentModel.description,
                     timestamp: responseTimestamp.toISOString()
                 });
+                
                 renderCurrentConversation();
                 scrollToBottom();
                 saveState();
+                
             } catch (error) {
-                console.error('Error fetching AI response:', error);
+                console.error('Error fetching response:', error);
                 // Remove typing indicator if present
                 removeTypingIndicator();
+                
+                // Check for token limit error or timeout error
+                let errorMessage = '';
+                if (error.message.includes('timeout') || error.message.includes('fetch')) {
+                    errorMessage = "The conversation is too long and exceeded the AI's token limit. Please start a new chat or try a different model.";
+                } else {
+                    errorMessage = `Error: ${error.message}`;
+                }
+                
                 // Add error message
                 const errorTimestamp = new Date();
                 conversation.messages.push({
                     role: 'system',
-                    content: `Error: Failed to get response from AI. 对话过长导致令牌限制，请新建会话或切换模型重试 ${error.message}`,
+                    content: errorMessage,
                     model: state.currentModel.description,
                     timestamp: errorTimestamp.toISOString()
                 });
@@ -2115,17 +2291,22 @@
         function renderCurrentConversation() {
             const conversation = getCurrentConversation();
             if (!conversation) return;
+            
             // Preserve typing indicator if it exists
             const typingIndicator = document.getElementById('typingIndicator');
             const hasTypingIndicator = typingIndicator !== null;
+            
             elements.chatArea.innerHTML = '';
+            
             // Keep track of last displayed timestamp
             let lastTimestamp = null;
+            
             conversation.messages.forEach((message, index) => {
                 // Add timestamp above message if needed
                 if (message.timestamp) {
                     const messageDate = new Date(message.timestamp);
                     const timeStr = formatTime(messageDate);
+                    
                     // Only add timestamp if it's different from the last one displayed
                     if (!lastTimestamp || timeStr !== lastTimestamp) {
                         const timeDiv = document.createElement('div');
@@ -2139,20 +2320,30 @@
                         lastTimestamp = timeStr;
                     }
                 }
+                
                 const messageDiv = document.createElement('div');
                 messageDiv.classList.add('message', `message-${message.role === 'user' ? 'user' : 'ai'}`);
+                
                 // Create avatar
                 const avatarDiv = document.createElement('div');
                 avatarDiv.classList.add('message-avatar');
                 avatarDiv.innerHTML = message.role === 'user' ? userAvatar : aiAvatar;
                 messageDiv.appendChild(avatarDiv);
+                
                 // Create message bubble
                 const messageBubble = document.createElement('div');
                 messageBubble.classList.add('message-bubble');
                 const messageText = document.createElement('div');
                 messageText.classList.add('message-text');
+                
                 // Format the message content with markdown-like formatting
                 let formattedContent = message.content;
+                
+                // Handle Markdown-style images
+                formattedContent = formattedContent.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (match, altText, imageUrl) => {
+                    return `<div class="chat-image-container" style="margin: 10px 0;"><img src="${imageUrl}" alt="${altText}" style="max-width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" /><div style="margin-top: 5px; font-size: 0.85rem; text-align: center; color: var(--light-text);">${altText}</div></div>`;
+                });
+                
                 // Extract code blocks and replace with placeholders
                 const codeBlocks = [];
                 formattedContent = formattedContent.replace(/```([^`]*?)```/gs, (match, codeContent) => {
@@ -2160,10 +2351,12 @@
                     codeBlocks.push({ id, content: codeContent.trim() });
                     return `[${id}]`;
                 });
+                
                 // Handle inline code
                 formattedContent = formattedContent.replace(/`([^`]+)`/g, (match, code) => {
                     return `<code>${escapeHtml(code)}</code>`;
                 });
+                
                 // Restore code blocks with proper formatting
                 for (const block of codeBlocks) {
                    const codeType = detectCodeType(block.content);
@@ -2173,12 +2366,30 @@
                         `<pre>${escapeHtml(block.content)}</pre><button class="code-preview-btn">Preview Code</button><div class="code-preview">${previewContent}</div>`
                     );
                 }
-                messageText.innerHTML = formattedContent;
+                
+                // Add special handling for system error messages about token limits
+                if (message.role === 'system' && (
+                    message.content.includes('token limit') || 
+                    message.content.includes('too long') ||
+                    message.content.includes('exceeded')
+                )) {
+                    messageText.innerHTML = `
+                        <div style="color: #ff3333; margin-bottom: 10px;">${formattedContent}</div>
+                        <button id="newChatFromError" class="btn" style="background: var(--primary-color); color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class="fas fa-plus"></i> Start New Chat
+                        </button>
+                    `;
+                } else {
+                    messageText.innerHTML = formattedContent;
+                }
+                
                 messageBubble.appendChild(messageText);
+                
                 // Add message actions (copy button and model info)
                 if (message.role === 'assistant') {
                     const messageActions = document.createElement('div');
                     messageActions.classList.add('message-actions');
+                    
                     const copyBtn = document.createElement('div');
                     copyBtn.classList.add('message-copy');
                     copyBtn.innerHTML = '<i class="fas fa-copy"></i> ';
@@ -2193,6 +2404,7 @@
                             .catch(err => console.error('Could not copy text: ', err));
                     });
                     messageActions.appendChild(copyBtn);
+                    
                     // Add model info for AI messages
                     if (message.model) {
                         const modelInfo = document.createElement('div');
@@ -2200,17 +2412,45 @@
                         modelInfo.textContent = message.model;
                         messageActions.appendChild(modelInfo);
                     }
+                    
                     messageBubble.appendChild(messageActions);
                 }
+                
                 messageDiv.appendChild(messageBubble);
                 elements.chatArea.appendChild(messageDiv);
             });
+            
             // Setup code preview buttons
             setupCodePreviewButtons();
+            
+            // Add event listener to the "Start New Chat" button if it exists
+            const newChatFromErrorBtn = document.getElementById('newChatFromError');
+            if (newChatFromErrorBtn) {
+                newChatFromErrorBtn.addEventListener('click', createNewConversation);
+            }
+            
+            // Add event listeners for image buttons
+            const imageButtons = document.querySelectorAll('.image-action-button');
+            imageButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const action = this.getAttribute('data-action');
+                    const imageUrl = this.getAttribute('data-url');
+                    
+                    if (action === 'download') {
+                        // Open image in a new tab for download
+                        window.open(imageUrl, '_blank');
+                    } else if (action === 'regenerate') {
+                        const prompt = this.getAttribute('data-prompt');
+                        // TODO: Implement regenerate functionality
+                    }
+                });
+            });
+            
             // Re-add typing indicator if it was there before
             if (hasTypingIndicator) {
                 addTypingIndicator();
             }
+            
             // Update conversation title in sidebar
             renderConversationList();
         }

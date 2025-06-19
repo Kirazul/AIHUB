@@ -5,24 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="shortcut icon" href="/favicon.ico">
-    <title>Free AI Image Generator</title>
+    <title>AI HUB - Image Generator</title>
     <style>
         :root {
-            --primary-color: #00a8ff;
-            --secondary-color: #0097e6;
-            --bg-color: #0c1824;
-            --card-bg: #1a2634;
-            --text-color: #e4f1fe;
-            --accent-color: #00e4ff;
-            --error-color: #ff3838;
-            --success-color: #32ff7e;
+            --primary-color: #3a86ff;
+            --primary-light: #5c9aff;
+            --primary-dark: #2a76ef;
+            --secondary-color: #ae5ff8;
+            --bg-color: #030a19;
+            --card-bg: #071428;
+            --text-color: #ffffff;
+            --text-light: #d0d0d0;
+            --border-color: #333344;
+            --error-color: #EF4444;
+            --success-color: #10B981;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, #3a86ff, #ae5ff8);
+            --gradient-secondary: linear-gradient(135deg, #ae5ff8, #ff2a6d);
+            --nebula-color1: rgba(174, 95, 248, 0.25);
+            --nebula-color2: rgba(184, 146, 255, 0.25);
+            --nebula-color3: rgba(0, 212, 255, 0.25);
+            --nebula-color4: rgba(58, 134, 255, 0.2);
+            --nebula-color5: rgba(0, 245, 212, 0.15);
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@200;300;400;500&display=swap');
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         }
 
         body {
@@ -30,15 +45,142 @@
             color: var(--text-color);
             min-height: 100vh;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 168, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(0, 228, 255, 0.1) 0%, transparent 20%);
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23122240' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23052044'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E"),
+                radial-gradient(ellipse at top, #061b35 0%, #020711 100%),
+                linear-gradient(135deg, rgba(10, 36, 99, 0.3) 0%, rgba(59, 23, 99, 0.3) 50%, rgba(125, 31, 47, 0.3) 100%);
+            background-blend-mode: overlay;
+            background-attachment: fixed;
+            overflow-x: hidden;
             padding: 20px;
+        }
+
+        /* Stars container */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -2;
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle var(--duration) infinite ease-in-out var(--delay);
+            box-shadow: 0 0 4px 1px rgba(255, 255, 255, 0.4);
+        }
+        .star.bright {
+            width: 3px;
+            height: 3px;
+            box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7), 0 0 12px 5px rgba(174, 95, 248, 0.3);
+        }
+        .star.extra-bright {
+            width: 4px;
+            height: 4px;
+            box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.9), 0 0 15px 8px rgba(0, 255, 225, 0.5);
+            z-index: -1;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--opacity); transform: scale(1); }
+        }
+
+        /* Nebula effect */
+        .nebula {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
+            background-blend-mode: screen;
+            mix-blend-mode: screen;
+            animation: nebula-float 30s infinite alternate ease-in-out;
+        }
+        @keyframes nebula-float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(10deg); }
+        }
+
+        /* Cosmic dust */
+        .cosmic-dust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            opacity: 0.6;
+            animation: cosmic-dust-move 120s linear infinite;
+        }
+        @keyframes cosmic-dust-move {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+
+        /* Deep space stars effect */
+        .deep-space {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 90px 40px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 160px 120px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 230px 190px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 250px 250px;
+        }
+
+        /* Planet orbits */
+        .orbit {
+            position: fixed;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: -1;
+            box-shadow: 0 0 30px rgba(1, 200, 238, 0.03);
+            animation: orbit-rotate 60s linear infinite;
+        }
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            box-shadow: 0 0 15px 2px var(--glow-color);
+            animation: planet-glow 4s ease-in-out infinite alternate;
+        }
+        .planet::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.1);
+            opacity: 0.3;
+        }
+        @keyframes orbit-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes planet-glow {
+            0% { box-shadow: 0 0 12px 2px var(--glow-color); }
+            100% { box-shadow: 0 0 18px 4px var(--glow-color); }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         header {
@@ -48,14 +190,25 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            font-weight: 500;
             margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(45deg, #ffffff 10%, var(--primary-color) 50%, var(--secondary-color) 100%);
             -webkit-background-clip: text;
             background-clip: text;
-            color: transparent;
+            -webkit-text-fill-color: transparent;
             position: relative;
             display: inline-block;
+            text-shadow: 0 0 15px rgba(58, 134, 255, 0.3);
+            letter-spacing: 2px;
+            background-size: 200% auto;
+            animation: gradient-move 8s ease infinite;
+        }
+
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         h1::after {
@@ -65,12 +218,15 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            box-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
         }
 
         .subtitle {
-            color: rgba(228, 241, 254, 0.7);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(58, 134, 255, 0.2);
         }
 
         .main-content {
@@ -86,12 +242,22 @@
         }
 
         .control-panel {
-            background-color: var(--card-bg);
-            border-radius: 15px;
+            background: rgba(7, 20, 40, 0.7);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 100%);
+            border-radius: var(--border-radius);
             padding: 25px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--box-shadow);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(58, 134, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .control-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(58, 134, 255, 0.2), 0 0 10px rgba(58, 134, 255, 0.1) inset;
+            border-color: rgba(58, 134, 255, 0.2);
         }
 
         .control-panel::before {
@@ -101,7 +267,8 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: var(--gradient-primary);
+            box-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
         }
 
         .form-group {
@@ -112,7 +279,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--accent-color);
+            color: var(--text-color);
         }
 
         input[type="text"],
@@ -121,12 +288,13 @@
         select {
             width: 100%;
             padding: 12px 15px;
-            border-radius: 8px;
-            border: 1px solid rgba(0, 168, 255, 0.3);
-            background-color: rgba(26, 38, 52, 0.8);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            background-color: rgba(18, 26, 41, 0.8);
             color: var(--text-color);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         input[type="text"]:focus,
@@ -134,13 +302,15 @@
         textarea:focus,
         select:focus {
             outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(0, 228, 255, 0.2);
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            background-color: rgba(26, 32, 44, 0.9);
         }
 
         textarea {
             min-height: 100px;
             resize: vertical;
+            line-height: 1.6;
         }
 
         .checkbox-group {
@@ -157,28 +327,48 @@
         }
 
         button {
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
             padding: 12px 25px;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(58, 134, 255, 0.3);
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        button:hover::after {
+            opacity: 1;
         }
 
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 228, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(58, 134, 255, 0.4);
         }
 
         button:active {
             transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(79, 70, 229, 0.2);
         }
 
         button i {
@@ -192,14 +382,24 @@
         }
 
         .preview-panel {
-            background-color: var(--card-bg);
-            border-radius: 15px;
+            background: rgba(7, 20, 40, 0.7);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 100%);
+            border-radius: var(--border-radius);
             padding: 25px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--box-shadow);
             display: flex;
             flex-direction: column;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(58, 134, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .preview-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(58, 134, 255, 0.2), 0 0 10px rgba(58, 134, 255, 0.1) inset;
+            border-color: rgba(58, 134, 255, 0.2);
         }
 
         .preview-panel::before {
@@ -209,7 +409,8 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+            background: var(--gradient-primary);
+            box-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
         }
 
         .image-container {
@@ -218,11 +419,12 @@
             align-items: center;
             justify-content: center;
             min-height: 300px;
-            background-color: rgba(12, 24, 36, 0.5);
-            border-radius: 10px;
+            background-color: rgba(18, 26, 41, 0.5);
+            border-radius: var(--border-radius);
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .image-container img {
@@ -249,10 +451,10 @@
         .spinner {
             width: 50px;
             height: 50px;
-            border: 3px solid rgba(0, 228, 255, 0.3);
+            border: 3px solid rgba(58, 134, 255, 0.2);
             border-radius: 50%;
-            border-top-color: var(--accent-color);
-            animation: spin 1s ease-in-out infinite;
+            border-top-color: var(--primary-color);
+            animation: spin 1s linear infinite;
             margin-bottom: 15px;
         }
 
@@ -261,12 +463,14 @@
         }
 
         .image-info {
-            background-color: rgba(26, 38, 52, 0.8);
+            background-color: rgba(18, 26, 41, 0.8);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             font-size: 0.9rem;
             max-height: 150px;
             overflow-y: auto;
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
         }
 
         .image-info pre {
@@ -290,13 +494,19 @@
             top: 20px;
             right: 20px;
             padding: 15px 25px;
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             color: white;
             font-weight: 500;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             z-index: 1000;
             transform: translateX(150%);
             transition: transform 0.3s ease;
+            animation: fadeInUp 0.4s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(10px) translateX(150%); }
+            to { opacity: 1; transform: translateY(0) translateX(0); }
         }
 
         .notification.show {
@@ -304,11 +514,15 @@
         }
 
         .notification.error {
-            background-color: var(--error-color);
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #B91C1C;
+            border-left: 3px solid var(--error-color);
         }
 
         .notification.success {
-            background-color: var(--success-color);
+            background-color: rgba(16, 185, 129, 0.1);
+            color: #065F46;
+            border-left: 3px solid var(--success-color);
         }
 
         .glow-effect {
@@ -316,7 +530,7 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--accent-color) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
             opacity: 0.1;
             filter: blur(20px);
             animation: float 8s ease-in-out infinite;
@@ -330,12 +544,12 @@
         .model-info {
             margin-top: 10px;
             font-size: 0.85rem;
-            color: rgba(228, 241, 254, 0.6);
+            color: var(--text-light);
         }
 
         .parameter-tips {
             font-size: 0.85rem;
-            color: rgba(228, 241, 254, 0.6);
+            color: var(--text-light);
             margin-top: 5px;
         }
 
@@ -365,12 +579,22 @@
         /* 历史记录样式 */
         .history-panel {
             margin-top: 30px;
-            background-color: var(--card-bg);
-            border-radius: 15px;
+            background: rgba(7, 20, 40, 0.7);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 100%);
+            border-radius: var(--border-radius);
             padding: 25px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--box-shadow);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(58, 134, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .history-panel:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(58, 134, 255, 0.2), 0 0 10px rgba(58, 134, 255, 0.1) inset;
+            border-color: rgba(58, 134, 255, 0.2);
         }
 
         .history-panel::before {
@@ -380,7 +604,8 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--primary-color), var(--accent-color));
+            background: var(--gradient-primary);
+            box-shadow: 0 0 10px rgba(58, 134, 255, 0.5);
         }
 
         .history-title {
@@ -397,17 +622,19 @@
         }
 
         .history-item {
-            background-color: rgba(26, 38, 52, 0.8);
-            border-radius: 10px;
+            background-color: rgba(18, 26, 41, 0.8);
+            border-radius: var(--border-radius);
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: var(--transition);
             cursor: pointer;
             position: relative;
+            border: 1px solid rgba(58, 134, 255, 0.1);
         }
 
         .history-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(58, 134, 255, 0.2), 0 0 10px rgba(58, 134, 255, 0.1) inset;
+            border-color: rgba(58, 134, 255, 0.2);
         }
 
         .history-item img {
@@ -435,7 +662,7 @@
         .empty-history {
             text-align: center;
             padding: 30px;
-            color: rgba(228, 241, 254, 0.5);
+            color: var(--text-light);
         }
 
         /* 响应式调整 */
@@ -478,57 +705,30 @@
     display: none; /* Chrome, Safari 和 Opera */
 }
 
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="tech-decoration top-left">
-            system.init()<br>
-            loading_ai_modules...<br>
-            connection_established<br>
-            pollinations.ai_v2.1
-        </div>
-        
-        <div class="tech-decoration bottom-right">
-            status: online<br>
-            latency: 23ms<br>
-            neural_net: active<br>
-            creative_engine: running
-        </div>
-        
-        <div class="glow-effect" style="top: 10%; left: 20%;"></div>
-        <div class="glow-effect" style="bottom: 30%; right: 10%;"></div>
-        
-        <header>
-            <h1>Free AI Painting Generator</h1>
-            <p class="subtitle">Based on Pollinations AI's Advanced Image Generation System</p>
-<br><br>
-
-
-<style>
-.sci-fi-btn {
+        .sci-fi-btn {
     position: relative;
     padding: 4px 8px;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Space Grotesk', 'Arial', sans-serif;
     font-size: 1em;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #00f3ff;
-    background: #0a0a2e;
-    border: 2px solid #3d3dff;
+    color: #3a86ff;
+    background: #071428;
+    border: 2px solid #3a86ff;
     border-radius: 8px;
     cursor: pointer;
     overflow: hidden;
     transition: 0.5s;
-    text-shadow: 0 0 10px #00f3ff;
-    box-shadow: 0 0 20px rgba(61, 61, 255, 0.3);
+    text-shadow: 0 0 10px #3a86ff;
+    box-shadow: 0 0 20px rgba(58, 134, 255, 0.3);
 }
 
-.sci-fi-btn:hover {
-    background: #13134e;
-    box-shadow: 0 0 30px rgba(61, 61, 255, 0.6);
+        .sci-fi-btn:hover {
+    background: #0a2040;
+    box-shadow: 0 0 30px rgba(58, 134, 255, 0.6);
     transform: scale(1.05);
     color: #ffffff;
+    border-color: #5c9aff;
 }
 
 
@@ -544,7 +744,94 @@
     left: -2px;
     right: -2px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #3d3dff);
+    background: linear-gradient(90deg, transparent, #3a86ff);
+    animation: borderTop 2s linear infinite;
+}
+
+@keyframes borderTop {
+    0% { left: -2px; }
+    100% { left: 100%; }
+}
+
+/* 添加点击动画 */
+.sci-fi-btn:active {
+    transform: scale(0.45);
+    transition: 0.1s;
+}
+
+    </style>
+</head>
+<body>
+    <div class="stars-container" id="stars-container"></div>
+    <div class="deep-space"></div>
+    <div class="cosmic-dust" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><g fill-opacity=%220.05%22><circle fill=%22%23fff%22 cx=%2225%22 cy=%2270%22 r=%220.7%22/><circle fill=%22%23fff%22 cx=%2240%22 cy=%2280%22 r=%220.5%22/><circle fill=%22%23fff%22 cx=%2275%22 cy=%2225%22 r=%220.7%22/><circle fill=%22%23fff%22 cx=%2275%22 cy=%2275%22 r=%220.5%22/><circle fill=%22%23eee%22 cx=%2279%22 cy=%2220%22 r=%220.7%22/><circle fill=%22%23fff%22 cx=%22100%22 cy=%2220%22 r=%220.6%22/><circle fill=%22%23fff%22 cx=%2215%22 cy=%2215%22 r=%220.5%22/></g></svg>');"></div>
+
+    <!-- Nebula effects -->
+    <div class="nebula" style="width: 600px; height: 600px; top: -100px; left: -100px; background: var(--nebula-color1);"></div>
+    <div class="nebula" style="width: 500px; height: 500px; bottom: -100px; right: -100px; background: var(--nebula-color2); animation-delay: -15s;"></div>
+    <div class="nebula" style="width: 400px; height: 400px; top: 50%; right: -150px; background: var(--nebula-color3); animation-delay: -7s;"></div>
+    <div class="nebula" style="width: 700px; height: 700px; top: 30%; left: 60%; background: var(--nebula-color4); animation-delay: -20s;"></div>
+    <div class="nebula" style="width: 350px; height: 350px; bottom: 20%; left: 10%; background: var(--nebula-color5); animation-delay: -10s;"></div>
+    
+    <!-- Planet orbits -->
+    <div class="orbit" style="width: 800px; height: 800px; top: 50%; left: 10%; transform: translate(-50%, -50%); border: 1px solid rgba(58, 134, 255, 0.2);">
+        <div class="planet" style="width: 20px; height: 20px; background: var(--primary-color); top: 0%; left: 50%; --glow-color: var(--primary-color);"></div>
+    </div>
+    <div class="orbit" style="width: 400px; height: 400px; top: 20%; right: 10%; transform: translate(50%, -50%); animation-duration: 40s; border: 1px solid rgba(174, 95, 248, 0.2);">
+        <div class="planet" style="width: 15px; height: 15px; background: var(--secondary-color); bottom: 0%; left: 50%; --glow-color: var(--secondary-color);"></div>
+    </div>
+    <div class="orbit" style="width: 300px; height: 300px; top: 85%; left: 75%; transform: translate(-50%, -50%); animation-duration: 30s; border: 1px solid rgba(0, 212, 255, 0.2);">
+        <div class="planet" style="width: 12px; height: 12px; background: var(--primary-light); top: 50%; right: 0%; --glow-color: var(--primary-light);"></div>
+        </div>
+        
+    <div class="container">
+        <header>
+            <h1>AI HUB Image Generator</h1>
+            <p class="subtitle">Create Beautiful AI-Generated Artwork</p>
+<br><br>
+
+
+<style>
+.sci-fi-btn {
+    position: relative;
+    padding: 4px 8px;
+    font-family: 'Space Grotesk', 'Arial', sans-serif;
+    font-size: 1em;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #3a86ff;
+    background: #071428;
+    border: 2px solid #3a86ff;
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.5s;
+    text-shadow: 0 0 10px #3a86ff;
+    box-shadow: 0 0 20px rgba(58, 134, 255, 0.3);
+}
+
+.sci-fi-btn:hover {
+    background: #0a2040;
+    box-shadow: 0 0 30px rgba(58, 134, 255, 0.6);
+    transform: scale(1.05);
+    color: #ffffff;
+    border-color: #5c9aff;
+}
+
+
+
+.sci-fi-btn:hover::before {
+    left: 100%;
+}
+
+
+
+.glowing-border:nth-child(1) {
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #3a86ff);
     animation: borderTop 2s linear infinite;
 }
 
@@ -565,7 +852,7 @@
     <!-- Glowing borders -->
     <span class="glowing-border"></span>
     <span class="glowing-border"></span>
-    Back to Home
+    Back to AI HUB
 </a>
 
         </header>
@@ -651,7 +938,7 @@
                         <div>Generating image...</div>
                     </div>
                     <img id="preview-image" style="display: none;">
-                    <div id="placeholder-text" style="color: rgba(228, 241, 254, 0.5); text-align: center;">
+                    <div id="placeholder-text" style="color: var(--text-light); text-align: center;">
                         Click "Generate Image" to start creating
                     </div>
                 </div>
@@ -689,19 +976,18 @@
     
 
 
-<p style="text-align: center; padding: 2px 0;  color: inherit; font-family: 'Arial', sans-serif; font-size: 12px; line-height: 1.6; margin-top: 3px;">
+<p style="text-align: center; padding: 2rem 0 1.5rem; color: var(--text-light); font-size: 0.9rem; opacity: 0.8;">
   <span style="display: inline-block; position: relative; vertical-align: middle;">
-    © 2025 <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none;  color: inherit; transition: color 0.3s ease;">FreeAI English</a>
+    © 2025 <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.3s ease;">AI HUB</a>
   </span>
   |
   <span style="display: inline-block; position: relative; vertical-align: middle;">
-    <i class="fas fa-brain" style="margin-right: 5px;"></i>
-    Powered by Pollinations.AI
+    Made with ❤️ by Kira
   </span>
   |
   <span style="display: inline-block; position: relative; vertical-align: middle;">
     <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none; color: inherit; transition: color 0.3s ease;">
-      <i class="fas fa-github" style="margin-right: 5px;"></i>GitHub Repository
+      <i class="fab fa-github" style="margin-right: 5px;"></i>GitHub Repository
     </a>
   </span>
 </p>
@@ -711,6 +997,37 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Create stars
+            const starsContainer = document.getElementById('stars-container');
+            const starsCount = window.innerWidth <= 768 ? 100 : 200;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Random position
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                
+                // Random animation duration and delay
+                const duration = 2 + Math.random() * 3;
+                const delay = Math.random() * 5;
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.setProperty('--delay', `${delay}s`);
+                star.style.setProperty('--opacity', `${0.5 + Math.random() * 0.5}`);
+                
+                // Make some stars brighter
+                if (Math.random() > 0.85) {
+                    star.classList.add('bright');
+                } else if (Math.random() > 0.95) {
+                    star.classList.add('extra-bright');
+                }
+                
+                starsContainer.appendChild(star);
+            }
+            
             // 获取DOM元素
             const promptInput = document.getElementById('prompt');
             const negativePromptInput = document.getElementById('negative-prompt');

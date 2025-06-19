@@ -1,11 +1,61 @@
-# FreeAI
-FreeAI - An AI application platform based on [Pollinations.AI](https://pollinations.ai/) API, providing free and unlimited AI chat assistance, image generation, and voice synthesis services.
+# 🚀 AI HUB
 
-🔑 Key Features:
-1. Free AI chat assistant that supports answering questions, providing creative suggestions, and writing text.
-2. AI image generation that transforms text descriptions into various styles and high-resolution visual art.
-3. AI voice synthesis that converts text into realistic speech in multiple languages and voice styles.
-4. **No registration required, unlimited use, completely free.**
+<div align="center">
+  <img src="https://img.shields.io/badge/Version-1.0.0-blue.svg" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/Made%20with-❤️-ff69b4.svg" alt="Made with Love">
+</div>
 
-Demo: [freeai.aihub.ren](https://kirazul.github.io/FreeApi/)
+<br>
 
+## ✨ Overview
+
+**AI HUB** is your gateway to powerful AI tools in one beautiful, space-themed interface. Access cutting-edge AI models for chat, image generation, and text-to-speech conversion - all for free!
+
+<br>
+
+## 🤖 Features
+
+### AI Chat Assistant
+Access to powerful AI models including:
+- OpenAI GPT-4o-mini & GPT-4o
+- OpenAI o1-mini & o3-mini
+- Qwen & Qwen 2.5 Coder 32B
+- Meta Llama 3.3 70B & Llama 3.1 8B Instruct
+- Mistral Nemo
+- DeepSeek-V3 & DeepSeek-R1 models
+- Anthropic Claude 3.5 Haiku
+- Google Gemini 2.0 Flash & Flash Thinking
+- Microsoft Phi-4 Multimodal Instruct
+
+### 🎨 AI Image Generation
+Transform text descriptions into beautiful artwork instantly. Multiple styles available with high-resolution export options.
+
+### 🔊 AI Voice Synthesis
+Create realistic speech from text in multiple languages and voice styles. Perfect for content creators and educators.
+
+<br>
+
+## 🌐 Live Demo
+
+Visit the live demo: [AI HUB](https://kirazul.github.io/FreeApi/)
+
+<br>
+
+## 🛠️ Technology
+
+- **Frontend**: HTML5, CSS3, JavaScript
+- **UI Design**: Space-themed with modern, responsive interface
+
+<br>
+
+## 👨‍💻 Author
+
+Made with ❤️ by Kira
+
+<br>
+
+---
+
+<div align="center">
+  <p>⭐ If you find this project useful, please consider giving it a star! ⭐</p>
+</div>

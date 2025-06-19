@@ -6,22 +6,25 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="shortcut icon" href="favicon.ico">
-    <title>FreeAI - Based on Pollinations.AI</title>
+    <title>AI HUB - Your Gateway to AI Tools</title>
     <style>
         :root {
-            --neon-pink: #ff2a6d;
-            --neon-blue: #01c8ee;
+            --neon-blue: #3a86ff;
             --neon-purple: #ae5ff8;
-            --neon-green: #05ffa1;
-            --space-blue: #0b3d91;
-            --cosmic-purple: #6633cc;
-            --dark-bg: #05060f;
+            --neon-teal: #00f5d4;
+            --neon-violet: #9d4edd;
+            --neon-lavender: #b892ff;
+            --neon-cyan: #00d4ff;
+            --neon-amber: #ffb344;
+            --dark-bg: #030a19;
             --darker-bg: #02030a;
-            --accent-color: #ff2a6d;
+            --accent-color: #3a86ff;
             --star-color: #ffffff;
-            --nebula-color1: rgba(174, 95, 248, 0.2);
-            --nebula-color2: rgba(1, 200, 238, 0.2);
-            --nebula-color3: rgba(255, 42, 109, 0.2);
+            --nebula-color1: rgba(174, 95, 248, 0.25);
+            --nebula-color2: rgba(184, 146, 255, 0.25);
+            --nebula-color3: rgba(0, 212, 255, 0.25);
+            --nebula-color4: rgba(58, 134, 255, 0.2);
+            --nebula-color5: rgba(0, 245, 212, 0.15);
         }
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Inter:wght@200;300;400;500&display=swap');
 
@@ -35,7 +38,8 @@ body {
     background-color: var(--dark-bg);
     background-image: 
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23122240' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%23052044'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E"),
-        radial-gradient(ellipse at top, #05162c 0%, #020711 100%);
+        radial-gradient(ellipse at top, #061b35 0%, #020711 100%),
+        linear-gradient(135deg, rgba(10, 36, 99, 0.3) 0%, rgba(59, 23, 99, 0.3) 50%, rgba(125, 31, 47, 0.3) 100%);
     background-blend-mode: overlay;
     background-attachment: fixed;
     color: #ffffff;
@@ -74,6 +78,12 @@ body::-webkit-scrollbar {
             width: 3px;
             height: 3px;
             box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.7), 0 0 12px 5px rgba(174, 95, 248, 0.3);
+        }
+        .star.extra-bright {
+            width: 4px;
+            height: 4px;
+            box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.9), 0 0 15px 8px rgba(0, 255, 225, 0.5);
+            z-index: -1;
         }
         @keyframes twinkle {
             0%, 100% { opacity: 0; transform: scale(0.5); }
@@ -165,7 +175,7 @@ body::-webkit-scrollbar {
     max-width: 1100px;
     width: 100%;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 2rem 2rem;
     position: relative;
     z-index: 2;
     flex: 1;
@@ -174,9 +184,9 @@ body::-webkit-scrollbar {
 }
         header {
             text-align: center;
-            margin-bottom: 6rem;
+            margin-bottom: 3rem;
             position: relative;
-            padding-top: 3rem;
+            padding-top: 2rem;
         }
         h1 {
             font-size: 3.5rem;
@@ -186,26 +196,59 @@ body::-webkit-scrollbar {
             color: #ffffff;
             position: relative;
             display: inline-block;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-            background: linear-gradient(45deg, #ffffff 30%, #a0f5ff 100%);
+            text-shadow: 0 0 15px rgba(58, 134, 255, 0.3);
+            background: linear-gradient(45deg, #ffffff 10%, var(--neon-teal) 50%, var(--neon-blue) 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradient-move 8s ease infinite;
+        }
+        @keyframes gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .header-line {
-            width: 60px;
+            width: 120px;
             height: 1px;
-            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0), 
+                rgba(58,134,255,0.8), 
+                rgba(0,245,212,0.6), 
+                rgba(58,134,255,0.8), 
+                rgba(255,255,255,0));
             margin: 0 auto 1.5rem auto;
+            box-shadow: 0 0 10px rgba(58,134,255,0.3);
+            animation: line-pulse 4s ease-in-out infinite;
+            }
+        @keyframes line-pulse {
+            0%, 100% { opacity: 0.7; width: 100px; }
+            50% { opacity: 1; width: 140px; }
         }
         .subtitle {
             font-size: 0.95rem;
             margin-bottom: 3rem;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.8);
             letter-spacing: 3px;
             position: relative;
             font-weight: 300;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 10px rgba(58, 134, 255, 0.2);
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0.7), 
+                rgba(0,245,212,0.8), 
+                rgba(58,134,255,0.7),
+                rgba(255,255,255,0.7));
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: subtitle-move 12s ease infinite;
+        }
+        @keyframes subtitle-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .grid {
             display: grid;
@@ -215,35 +258,41 @@ body::-webkit-scrollbar {
             max-width: 1100px;
         }
         .card {
-            background: rgba(5, 6, 15, 0.5);
-            border-radius: 3px;
-            padding: 2rem;
+            background: rgba(3, 10, 25, 0.5);
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(0, 0, 0, 0) 100%);
+            border-radius: 8px;
+            padding: 2.2rem;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .card:nth-child(1) {
-            box-shadow: 0 5px 15px rgba(1, 200, 238, 0.1);
+            box-shadow: 0 5px 15px rgba(58, 134, 255, 0.2);
+            border: 1px solid rgba(58, 134, 255, 0.1);
         }
         .card:nth-child(2) {
-            box-shadow: 0 5px 15px rgba(255, 42, 109, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 245, 212, 0.2);
+            border: 1px solid rgba(0, 245, 212, 0.1);
         }
         .card:nth-child(3) {
-            box-shadow: 0 5px 15px rgba(174, 95, 248, 0.1);
+            box-shadow: 0 5px 15px rgba(174, 95, 248, 0.2);
+            border: 1px solid rgba(174, 95, 248, 0.1);
         }
         .card:nth-child(1):hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(1, 200, 238, 0.2);
+            box-shadow: 0 8px 25px rgba(58, 134, 255, 0.3), 0 0 10px rgba(58, 134, 255, 0.1) inset;
+            border-color: rgba(58, 134, 255, 0.2);
         }
         .card:nth-child(2):hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(255, 42, 109, 0.2);
+            box-shadow: 0 8px 25px rgba(0, 245, 212, 0.3), 0 0 10px rgba(0, 245, 212, 0.1) inset;
+            border-color: rgba(0, 245, 212, 0.2);
         }
         .card:nth-child(3):hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(174, 95, 248, 0.2);
+            box-shadow: 0 8px 25px rgba(174, 95, 248, 0.3), 0 0 10px rgba(174, 95, 248, 0.1) inset;
+            border-color: rgba(174, 95, 248, 0.2);
         }
 
         .card-content {
@@ -284,14 +333,14 @@ body::-webkit-scrollbar {
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
         }
         .card:nth-child(1) .card-icon {
-            background: rgba(1, 200, 238, 0.15);
+            background: rgba(58, 134, 255, 0.15);
             color: var(--neon-blue);
             text-shadow: 0 0 10px var(--neon-blue);
         }
         .card:nth-child(2) .card-icon {
-            background: rgba(255, 42, 109, 0.15);
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
+            background: rgba(0, 245, 212, 0.15);
+            color: var(--neon-teal);
+            text-shadow: 0 0 10px var(--neon-teal);
         }
         .card:nth-child(3) .card-icon {
             background: rgba(174, 95, 248, 0.15);
@@ -334,12 +383,12 @@ body::-webkit-scrollbar {
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
         }
         .card:nth-child(1) .btn:hover {
-            border-color: rgba(1, 200, 238, 0.3);
-            box-shadow: 0 4px 12px rgba(1, 200, 238, 0.2);
+            border-color: rgba(58, 134, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(58, 134, 255, 0.2);
         }
         .card:nth-child(2) .btn:hover {
-            border-color: rgba(255, 42, 109, 0.3);
-            box-shadow: 0 4px 12px rgba(255, 42, 109, 0.2);
+            border-color: rgba(0, 245, 212, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 245, 212, 0.2);
         }
         .card:nth-child(3) .btn:hover {
             border-color: rgba(174, 95, 248, 0.3);
@@ -416,36 +465,41 @@ body::-webkit-scrollbar {
     <div class="nebula" style="width: 600px; height: 600px; top: -100px; left: -100px; background: var(--nebula-color1);"></div>
     <div class="nebula" style="width: 500px; height: 500px; bottom: -100px; right: -100px; background: var(--nebula-color2); animation-delay: -15s;"></div>
     <div class="nebula" style="width: 400px; height: 400px; top: 50%; right: -150px; background: var(--nebula-color3); animation-delay: -7s;"></div>
-    <div class="nebula" style="width: 700px; height: 700px; top: 30%; left: 60%; background: rgba(5, 255, 161, 0.1); animation-delay: -20s;"></div>
-    <div class="nebula" style="width: 350px; height: 350px; bottom: 20%; left: 10%; background: rgba(255, 150, 70, 0.1); animation-delay: -10s;"></div>
+    <div class="nebula" style="width: 700px; height: 700px; top: 30%; left: 60%; background: var(--nebula-color4); animation-delay: -20s;"></div>
+    <div class="nebula" style="width: 350px; height: 350px; bottom: 20%; left: 10%; background: var(--nebula-color5); animation-delay: -10s;"></div>
+    <div class="nebula" style="width: 450px; height: 450px; top: 70%; left: 70%; background: var(--nebula-color1); opacity: 0.15; animation-delay: -25s;"></div>
+    <div class="nebula" style="width: 300px; height: 300px; top: 15%; left: 30%; background: var(--nebula-color3); opacity: 0.15; animation-delay: -12s;"></div>
     
     <!-- 行星轨道 -->
-    <div class="orbit" style="width: 800px; height: 800px; top: 50%; left: 10%; transform: translate(-50%, -50%);">
+    <div class="orbit" style="width: 800px; height: 800px; top: 50%; left: 10%; transform: translate(-50%, -50%); border: 1px solid rgba(58, 134, 255, 0.2);">
         <div class="planet" style="width: 20px; height: 20px; background: var(--neon-blue); top: 0%; left: 50%; --glow-color: var(--neon-blue);"></div>
     </div>
-    <div class="orbit" style="width: 400px; height: 400px; top: 20%; right: 10%; transform: translate(50%, -50%); animation-duration: 40s;">
-        <div class="planet" style="width: 15px; height: 15px; background: var(--neon-pink); bottom: 0%; left: 50%; --glow-color: var(--neon-pink);"></div>
+    <div class="orbit" style="width: 400px; height: 400px; top: 20%; right: 10%; transform: translate(50%, -50%); animation-duration: 40s; border: 1px solid rgba(0, 245, 212, 0.2);">
+        <div class="planet" style="width: 15px; height: 15px; background: var(--neon-teal); bottom: 0%; left: 50%; --glow-color: var(--neon-teal);"></div>
     </div>
-    <div class="orbit" style="width: 300px; height: 300px; top: 85%; left: 75%; transform: translate(-50%, -50%); animation-duration: 30s;">
-        <div class="planet" style="width: 12px; height: 12px; background: var(--neon-green); top: 50%; right: 0%; --glow-color: var(--neon-green);"></div>
+    <div class="orbit" style="width: 300px; height: 300px; top: 85%; left: 75%; transform: translate(-50%, -50%); animation-duration: 30s; border: 1px solid rgba(0, 212, 255, 0.2);">
+        <div class="planet" style="width: 12px; height: 12px; background: var(--neon-cyan); top: 50%; right: 0%; --glow-color: var(--neon-cyan);"></div>
     </div>
-    <div class="orbit" style="width: 200px; height: 200px; top: 30%; left: 80%; transform: translate(-50%, -50%); animation-duration: 20s; animation-direction: reverse;">
+    <div class="orbit" style="width: 200px; height: 200px; top: 30%; left: 80%; transform: translate(-50%, -50%); animation-duration: 20s; animation-direction: reverse; border: 1px solid rgba(174, 95, 248, 0.2);">
         <div class="planet" style="width: 8px; height: 8px; background: var(--neon-purple); bottom: 30%; right: 50%; --glow-color: var(--neon-purple);"></div>
+    </div>
+    <div class="orbit" style="width: 250px; height: 250px; top: 60%; left: 30%; transform: translate(-50%, -50%); animation-duration: 25s; animation-direction: reverse; border: 1px solid rgba(255, 179, 68, 0.15);">
+        <div class="planet" style="width: 10px; height: 10px; background: var(--neon-amber); top: 30%; left: 10%; --glow-color: var(--neon-amber);"></div>
     </div>
     
     <div class="container">
 
         <header>
-            <h1>FREE AI</h1>
+            <h1>AI HUB</h1>
             <div class="header-line"></div>
-            <p class="subtitle">EXPLORE THE FUTURE · UNLEASH CREATIVITY</p>
+            <p class="subtitle">ADVANCED AI TOOLS · UNLIMITED POSSIBILITIES</p>
         </header>
         <div class="grid">
             <div class="card">
                 <div class="card-content">
                     <div class="card-icon">💬</div>
                     <h2>AI Chat Assistant</h2>
-                    <p>Intelligent conversation partner that answers questions, provides suggestions, writes text, and solves complex problems. Free and unlimited.</p>
+                    <p>Access to powerful AI models including OpenAI GPT-4o, Claude 3.5 Haiku, Gemini 2.0, Llama 3.3 70B, DeepSeek-V3, Qwen 2.5 Coder, Mistral Nemo, and more.</p>
                     <a href="https://kirazul.github.io/FreeApi/chat" class="btn">START CHAT</a>
                 </div>
                 <div class="star-dust" id="dust-1"></div>
@@ -470,22 +524,25 @@ body::-webkit-scrollbar {
             </div>
         </div>
         <footer>
-            <p>© 2025 <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none; color: inherit;"><i class="fab fa-github" style="color: var(--neon-blue);"></i>   Free AI</a> | Based on Pollinations.AI | <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none; color: inherit;">English Version</a></p>
+            <p>© 2025 <a href="https://github.com/Kirazul/FreeApi" target="_blank" style="text-decoration: none; color: inherit;"><i class="fab fa-github" style="color: #ffffff;"></i> AI HUB</a> | Made with ❤️ by Kira</p>
         </footer>
     </div>
     <script>
-        // 创建星空背景
+        // Create starry background
         function createStars() {
             const starsContainer = document.getElementById('stars-container');
             const starCount = window.innerWidth < 768 ? 150 : 300;
             
-            // 创建星星
+            // Create stars
             for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
                 // Make some stars brighter
-                if (Math.random() > 0.9) {
+                const random = Math.random();
+                if (random > 0.95) {
+                    star.classList.add('extra-bright');
+                } else if (random > 0.85) {
                     star.classList.add('bright');
                 }
                 
@@ -512,8 +569,8 @@ body::-webkit-scrollbar {
                 starsContainer.appendChild(star);
             }
         }
-        
-        // 为卡片创建星尘效果
+            
+        // Create stardust effect for cards
         function createStarDust(containerId, color) {
             const container = document.getElementById(containerId);
             const particleCount = 30;
@@ -564,8 +621,8 @@ body::-webkit-scrollbar {
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
-            createStarDust('dust-1', '#01c8ee');
-            createStarDust('dust-2', '#ff2a6d');
+            createStarDust('dust-1', '#3a86ff');
+            createStarDust('dust-2', '#00f5d4');
             createStarDust('dust-3', '#ae5ff8');
             
             addMouseEffect();
