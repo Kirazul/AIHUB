@@ -453,9 +453,28 @@ body::-webkit-scrollbar {
                 padding: 1rem;
             }
         }
+        .colorful-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.65;
+            background: linear-gradient(120deg, #1a237e, #311b92, #0d133d, #232946, #2d3250, #1b1f3b, #232946, #0d133d);
+            background-size: 200% 200%;
+            animation: bg-gradient-move 16s ease-in-out infinite;
+        }
+        @keyframes bg-gradient-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
     </style>
 </head>
 <body>
+    <div class="colorful-bg"></div>
     <div class="stars-container" id="stars-container"></div>
     <div class="deep-space"></div>
     <div class="cosmic-dust" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><g fill-opacity=%220.05%22><circle fill=%22%23fff%22 cx=%2225%22 cy=%2270%22 r=%220.7%22/><circle fill=%22%23fff%22 cx=%2240%22 cy=%2280%22 r=%220.5%22/><circle fill=%22%23fff%22 cx=%2275%22 cy=%2325%22 r=%220.7%22/><circle fill=%22%23fff%22 cx=%2275%22 cy=%2275%22 r=%220.5%22/><circle fill=%22%23eee%22 cx=%2279%22 cy=%2220%22 r=%220.7%22/><circle fill=%22%23fff%22 cx=%22100%22 cy=%2320%22 r=%220.6%22/><circle fill=%22%23fff%22 cx=%2215%22 cy=%2315%22 r=%220.5%22/></g></svg>');"></div>
