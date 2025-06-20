@@ -10,7 +10,10 @@
 ## ✨ Overview
 
 **AI HUB** is your gateway to powerful AI tools in one beautiful, space-themed interface. Access cutting-edge AI models for chat, image generation, and text-to-speech conversion - all for free!
-  <img src="https://ibb.co/cS0sdLtH][img]https://i.ibb.co/JwVSPQ24/preview.png[img]">
+
+
+<img src="https://i.ibb.co/JwVSPQ24/preview.png" alt="AI HUB Preview">
+
 
 <br>
 
